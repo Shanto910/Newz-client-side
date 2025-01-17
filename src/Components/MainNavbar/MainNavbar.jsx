@@ -1,6 +1,6 @@
 const MainNavbar = () => {
 	return (
-		<nav>
+		<nav className="w-16 hidden sm:block">
 			<h1>Main Navbar </h1>
 		</nav>
 	);
