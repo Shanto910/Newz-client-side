@@ -2,10 +2,15 @@ import Lottie from 'react-lottie';
 import LogInAnimation from '../assets/LogIn-animation.json';
 import Swal from 'sweetalert2';
 import useAuth from '../Hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const LogIn = () => {
 	const { logIn, googleSignIn } = useAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const from = location.state?.from?.pathname || '/';
+
 	const defaultOptions = {
 		loop: true,
 		autoplay: true,
@@ -32,6 +37,7 @@ const LogIn = () => {
 					popup: 'animate__animated animate__fadeOutUp',
 				},
 			});
+			navigate(from, { replace: true });
 		} catch (error) {
 			Swal.fire({
 				title: 'User Login Failed!',
@@ -59,6 +65,7 @@ const LogIn = () => {
 					popup: 'animate__animated animate__fadeOutUp',
 				},
 			});
+			navigate(from, { replace: true });
 		} catch (error) {
 			Swal.fire({
 				title: 'User Login Failed!',

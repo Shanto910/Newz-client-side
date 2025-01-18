@@ -1,17 +1,20 @@
 import { Outlet } from 'react-router-dom';
 import Footer from '../Components/Footer/Footer';
-import MainNavbar from '../Components/MainNavbar/MainNavbar';
 import TopNavbar from '../Components/TopNavbar/TopNavbar';
+import Spinner from '../Components/Spinner/Spinner';
+import useAuth from '../Hooks/useAuth';
 
 const MainLayout = () => {
+	const { loading } = useAuth();
+
+	if (loading) {
+		return <Spinner />;
+	}
 	return (
 		<>
-			<MainNavbar />
-			<div className="flex flex-col w-full">
-				<TopNavbar />
-				<Outlet />
-				<Footer />
-			</div>
+			<TopNavbar />
+			<Outlet />
+			<Footer />
 		</>
 	);
 };
