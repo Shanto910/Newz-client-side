@@ -2,6 +2,7 @@ import Lottie from 'react-lottie';
 import LogInAnimation from '../assets/LogIn-animation.json';
 import Swal from 'sweetalert2';
 import useAuth from '../Hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const LogIn = () => {
 	const { logIn, googleSignIn } = useAuth();
@@ -124,11 +125,17 @@ const LogIn = () => {
 								<button className="tracking-wide font-semibold bg-gray-700 text-gray-100 w-full py-4 hover:bg-gray-800 transition-all duration-300 mt-5">
 									Log In
 								</button>
+								<span className="text-gray-600 mt-2 inline-block">
+									New here?{' '}
+									<Link to={'/register'} className="text-gray-900">
+										Register here.
+									</Link>
+								</span>
 							</form>
 						</div>
 					</div>
 				</div>
-				<div className="flex-1 bg-[#DDE3F0] hidden lg:flex">
+				<div className="flex-1 bg-[#DDE3F0] hidden lg:flex justify-center items-center">
 					<Lottie options={defaultOptions} loop autoplay height={400} width={400} />
 				</div>
 			</div>
