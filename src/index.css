@@ -4,11 +4,25 @@
 
 html,
 body {
-	height: 100%;
+	height: 150%;
 }
 
 .root {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+}
+
+.active {
+	color: rgb(31 41 55);
+	border-block-end: 2px solid rgb(31 41 55);
+}
+
+.text-ellipsis-custom {
+	display: -webkit-box;
+	line-clamp: 2;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

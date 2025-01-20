@@ -1,17 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { GiNewspaper } from 'react-icons/gi';
 import useAuth from '../../Hooks/useAuth';
 
 const TopNavbar = () => {
 	const { user, logOut } = useAuth();
 	return (
-		<nav className="sticky top-0 left-0 p-2 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10">
+		<nav className="sticky top-0 left-0 h-14 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10">
 			<Link
 				to={'/'}
 				className="text-2xl font-semibold text-gray-700 hover:text-gray-800 flex gap-1 items-center mr-auto">
 				<GiNewspaper className="text-5xl" />
 				<span>Newz</span>
 			</Link>
+
+			<NavLink
+				to={'/'}
+				className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+				Home
+			</NavLink>
+			<NavLink
+				to={'/all-articles'}
+				className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+				All Articles
+			</NavLink>
 
 			{user?.email ? (
 				<>
