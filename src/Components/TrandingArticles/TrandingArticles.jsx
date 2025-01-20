@@ -64,7 +64,14 @@ const trendingArticles = [
 
 const TrandingArticles = () => {
 	return (
-		<div className="max-w-screen-xl mx-auto">
+		<div className="max-w-screen-xl mx-auto relative isolate">
+			<div className="text-lg md:text-xl font-semibold">
+				<p className="absolute top-4 left-4 bg-white text-white z-10 p-2 -skew-x-6 border-b-4 border-l-4 border-gray-700">
+					Tranding Articles
+				</p>
+				<p className="absolute top-4 left-5 text-gray-700 z-10 p-2">Tranding Articles</p>
+			</div>
+
 			<Swiper
 				modules={[Navigation, Pagination, Autoplay]}
 				navigation={true}
