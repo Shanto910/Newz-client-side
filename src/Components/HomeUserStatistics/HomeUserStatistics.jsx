@@ -2,6 +2,7 @@ import { FaUsers } from 'react-icons/fa6';
 import { HiUsers } from 'react-icons/hi';
 import { FaUserPlus } from 'react-icons/fa6';
 import PropTypes from 'prop-types';
+import CountUp from 'react-countup';
 
 const StatCard = ({ Icon, count, label }) => (
 	<div className="flex flex-col items-center p-6 bg-white shadow-md hover:shadow-lg transition-shadow max-w-sm">
@@ -10,7 +11,9 @@ const StatCard = ({ Icon, count, label }) => (
 				<Icon className="w-10 h-10 text-gray-900" />
 			</div>
 		</div>
-		<div className="text-3xl font-extrabold text-gray-800">{count}</div>
+		<div className="text-3xl font-extrabold text-gray-800">
+			<CountUp end={count} duration={3} />
+		</div>
 		<div className="text-gray-500">{label}</div>
 	</div>
 );
@@ -22,9 +25,9 @@ const HomeUserStatistics = () => {
 				<h2 className="md:text-4xl text-2xl font-bold text-gray-700">Our Users</h2>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 mx-auto">
-				<StatCard Icon={FaUsers} count="70,680" label="All Users" />
-				<StatCard Icon={HiUsers} count="70,680" label="Free Users" />
-				<StatCard Icon={FaUserPlus} count="70,680" label="Premium Users" />
+				<StatCard Icon={FaUsers} count={11} label="All Users" />
+				<StatCard Icon={HiUsers} count={9} label="Free Users" />
+				<StatCard Icon={FaUserPlus} count={2} label="Premium Users" />
 			</div>
 		</div>
 	);
@@ -32,7 +35,7 @@ const HomeUserStatistics = () => {
 
 StatCard.propTypes = {
 	Icon: PropTypes.elementType.isRequired,
-	count: PropTypes.string.isRequired,
+	count: PropTypes.number.isRequired,
 	label: PropTypes.string.isRequired,
 };
 
