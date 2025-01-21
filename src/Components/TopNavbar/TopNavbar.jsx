@@ -5,7 +5,7 @@ import useAuth from '../../Hooks/useAuth';
 const TopNavbar = () => {
 	const { user, logOut } = useAuth();
 	return (
-		<nav className="sticky top-0 left-0 min-h-16 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10">
+		<nav className="fixed top-0 left-0 right-0 h-16 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10">
 			<Link
 				to={'/'}
 				className="text-2xl font-semibold text-gray-700 hover:text-gray-800 flex gap-1 items-center mr-auto">

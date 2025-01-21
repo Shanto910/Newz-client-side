@@ -39,7 +39,13 @@ const AllPublishers = () => {
 	return (
 		<div className="max-w-screen-xl mx-auto mb-12 md:mb-24">
 			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700">Our Publishers</h2>
+				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">
+					Our Publishers
+				</h2>
+				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
+					Explore a diverse range of categories and brands that deliver the latest news
+					and stories
+				</p>
 			</div>
 
 			<Swiper

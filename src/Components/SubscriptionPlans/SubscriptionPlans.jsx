@@ -1,8 +1,15 @@
+import { Link } from 'react-router-dom';
+
 const SubscriptionPlans = () => {
 	return (
 		<div className="max-w-screen-xl mx-auto mb-12 md:mb-24">
 			<div className="text-center mb-16">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700">Subscription Plans</h2>
+				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">
+					Subscription Plans
+				</h2>
+				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
+					Choose the plan that best fits your needs and enjoy all the benefits
+				</p>
 			</div>
 			<div className="flex flex-col md:flex-row justify-center items-center isolate px-4 lg:px-8 gap-6 md:gap-0">
 				<div className="md:relative z-10 flex-1 md:max-w-80 py-4 px-8 bg-gray-50 shadow-md hover:shadow-lg w-full">
@@ -19,9 +26,9 @@ const SubscriptionPlans = () => {
 						<li className="text-gray-800 list-disc ml-7 leading-loose">No storage</li>
 						<li className="text-gray-800 list-disc ml-7 leading-loose">No support</li>
 					</ul>
-					<button className="w-full py-4 bg-gray-600 text-gray-100 font-semibold mt-5">
+					<Link className="w-full py-4 bg-gray-600 hover:bg-gray-800 text-gray-100 font-semibold mt-5 inline-block text-center">
 						Try free for 1 month
-					</button>
+					</Link>
 				</div>
 
 				<div className="md:relative z-20 md:max-w-96 py-4 px-8 bg-gray-50 shadow-md hover:shadow-lg md:-my-8 md:-mx-4 flex-1 w-full">
@@ -46,9 +53,9 @@ const SubscriptionPlans = () => {
 							Can download articles
 						</li>
 					</ul>
-					<button className="w-full py-4 bg-gray-800 text-gray-100 font-semibold mt-5">
+					<Link className="w-full py-4 bg-gray-800 hover:bg-gray-900 text-gray-100 font-semibold mt-5 inline-block text-center">
 						Get premium
-					</button>
+					</Link>
 				</div>
 
 				<div className="md:relative z-10 flex-1 md:max-w-80 py-4 px-8 bg-gray-50 shadow-md hover:shadow-lg w-full">
@@ -63,9 +70,9 @@ const SubscriptionPlans = () => {
 							Can share with up to 4 people
 						</li>
 					</ul>
-					<button className="w-full py-4 bg-gray-600 text-gray-100 font-semibold mt-5">
+					<Link className="w-full py-4 bg-gray-600 hover:bg-gray-800 text-gray-100 font-semibold mt-5 inline-block text-center">
 						Get family pack
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>

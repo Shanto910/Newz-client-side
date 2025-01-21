@@ -22,7 +22,11 @@ const HomeUserStatistics = () => {
 	return (
 		<div className="max-w-screen-xl mx-auto mb-12 md:mb-24 px-4 md:px-8">
 			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700">Our Users</h2>
+				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">Our Users</h2>
+				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
+					Join thousands of readers who stay informed with the latest news and insights
+					from around the world
+				</p>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 mx-auto">
 				<StatCard Icon={FaUsers} count={11} label="All Users" />
