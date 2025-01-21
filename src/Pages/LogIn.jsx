@@ -3,13 +3,16 @@ import LogInAnimation from '../assets/LogIn-animation.json';
 import Swal from 'sweetalert2';
 import useAuth from '../Hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const LogIn = () => {
 	const { logIn, googleSignIn } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const axiosPublic = useAxiosPublic();
 
 	const from = location.state?.from?.pathname || '/';
+	console.log(from);
 
 	const defaultOptions = {
 		loop: true,
@@ -55,7 +58,14 @@ const LogIn = () => {
 
 	const handleGoogleSignIn = async () => {
 		try {
-			await googleSignIn();
+			const result = await googleSignIn();
+			const userInfo = {
+				email: result.user?.email,
+				name: result.user?.displayName,
+				isadmin: false,
+				isSubscribed: false,
+			};
+			await axiosPublic.post('/users', userInfo);
 			Swal.fire({
 				title: 'User Login Successful!',
 				showClass: {

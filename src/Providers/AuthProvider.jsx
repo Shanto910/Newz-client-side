@@ -23,9 +23,7 @@ const AuthProvider = ({ children }) => {
 	const createUser = async (email, password) => {
 		try {
 			setLoading(true);
-			const emailPassUser = await createUserWithEmailAndPassword(auth, email, password);
-			setLoading(false);
-			return emailPassUser;
+			return await createUserWithEmailAndPassword(auth, email, password);
 		} catch (error) {
 			setLoading(false);
 			console.log(error.message);
@@ -36,7 +34,7 @@ const AuthProvider = ({ children }) => {
 	const logIn = async (email, password) => {
 		try {
 			setLoading(true);
-			await signInWithEmailAndPassword(auth, email, password);
+			return await signInWithEmailAndPassword(auth, email, password);
 		} catch (error) {
 			setLoading(false);
 			console.log(error.message);
@@ -47,7 +45,7 @@ const AuthProvider = ({ children }) => {
 	const googleSignIn = async () => {
 		try {
 			setLoading(true);
-			await signInWithPopup(auth, googleProvider);
+			return await signInWithPopup(auth, googleProvider);
 		} catch (error) {
 			setLoading(false);
 			console.log(error.message);
@@ -58,7 +56,7 @@ const AuthProvider = ({ children }) => {
 	const logOut = async () => {
 		try {
 			setLoading(true);
-			await signOut(auth);
+			return await signOut(auth);
 		} catch (error) {
 			setLoading(false);
 			console.log(error.message);
@@ -68,7 +66,7 @@ const AuthProvider = ({ children }) => {
 
 	const updateUserProfile = async (name, photo) => {
 		try {
-			await updateProfile(auth.currentUser, {
+			return await updateProfile(auth.currentUser, {
 				displayName: name,
 				photoURL: photo,
 			});

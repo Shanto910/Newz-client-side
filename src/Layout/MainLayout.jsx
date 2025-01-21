@@ -13,6 +13,7 @@ const MainLayout = () => {
 	return (
 		<>
 			<TopNavbar />
+			<div className="mt-16"></div>
 			<Outlet />
 			<Footer />
 		</>
