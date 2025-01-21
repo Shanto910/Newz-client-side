@@ -23,7 +23,9 @@ const AuthProvider = ({ children }) => {
 	const createUser = async (email, password) => {
 		try {
 			setLoading(true);
-			await createUserWithEmailAndPassword(auth, email, password);
+			const emailPassUser = await createUserWithEmailAndPassword(auth, email, password);
+			setLoading(false);
+			return emailPassUser;
 		} catch (error) {
 			setLoading(false);
 			console.log(error.message);

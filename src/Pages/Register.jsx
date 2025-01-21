@@ -2,10 +2,14 @@ import Lottie from 'react-lottie';
 import RegisterAnimation from '../assets/Register-animation.json';
 import Swal from 'sweetalert2';
 import useAuth from '../Hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const Register = () => {
 	const { createUser, updateUserProfile, setUser } = useAuth();
+	const axiosPublic = useAxiosPublic();
+	const navigate = useNavigate();
+
 	const defaultOptions = {
 		loop: true,
 		autoplay: true,
@@ -71,16 +75,30 @@ const Register = () => {
 		try {
 			const result = await createUser(email, password);
 			await updateUserProfile(name, photo);
+
 			setUser({ ...result.user, photoURL: photo, displayName: name });
-			Swal.fire({
-				title: 'Yay! Register was successful!',
-				showClass: {
-					popup: 'animate__animated animate__fadeInDown',
-				},
-				hideClass: {
-					popup: 'animate__animated animate__fadeOutUp',
-				},
-			});
+
+			const userInfo = {
+				name: name,
+				email: email,
+				isadmin: false,
+				isSubscribed: false,
+			};
+
+			const dbResponse = await axiosPublic.post('/users', userInfo);
+
+			if (dbResponse.data.insertedId) {
+				Swal.fire({
+					title: 'Yay! Register was successful!',
+					showClass: {
+						popup: 'animate__animated animate__fadeInDown',
+					},
+					hideClass: {
+						popup: 'animate__animated animate__fadeOutUp',
+					},
+				});
+				navigate('/');
+			}
 		} catch (err) {
 			showAlert('User Register Failed!', err?.message);
 		}

@@ -27,7 +27,7 @@ const SubscriptionPlans = () => {
 						<li className="text-gray-800 list-disc ml-7 leading-loose">No support</li>
 					</ul>
 					<Link className="w-full py-4 bg-gray-600 hover:bg-gray-800 text-gray-100 font-semibold mt-5 inline-block text-center">
-						Try free for 1 month
+						Free by default
 					</Link>
 				</div>
 
