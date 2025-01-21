@@ -64,7 +64,7 @@ const trendingArticles = [
 
 const TrandingArticles = () => {
 	return (
-		<div className="max-w-screen-xl mx-auto relative isolate">
+		<div className="max-w-screen-xl mx-auto relative isolate mb-12 md:mb-24">
 			<div className="text-lg md:text-xl font-semibold">
 				<p className="absolute top-4 left-4 bg-white text-white z-10 p-2 -skew-x-6 border-b-4 border-l-4 border-gray-700">
 					Tranding Articles
