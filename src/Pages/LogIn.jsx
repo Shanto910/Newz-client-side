@@ -61,8 +61,7 @@ const LogIn = () => {
 			const userInfo = {
 				email: result.user?.email,
 				name: result.user?.displayName,
-				isadmin: false,
-				isSubscribed: false,
+				premiumTaken: null,
 			};
 			await axiosPublic.post('/users', userInfo);
 			Swal.fire({

@@ -81,8 +81,7 @@ const Register = () => {
 			const userInfo = {
 				name: name,
 				email: email,
-				isadmin: false,
-				isSubscribed: false,
+				premiumTaken: null,
 			};
 
 			const dbResponse = await axiosPublic.post('/users', userInfo);

@@ -11,9 +11,14 @@ body {
 	height: 100%;
 }
 
-.active {
+.topbar .active {
 	color: rgb(31 41 55);
 	border-block-end: 2px solid rgb(31 41 55);
+}
+
+.sidebar .active {
+	color: rgb(243 244 246);
+	background-color: rgb(55 65 81);
 }
 
 .text-ellipsis-custom {

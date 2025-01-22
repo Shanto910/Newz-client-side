@@ -7,7 +7,7 @@ const TopNavbar = () => {
 	const [isAdmin] = 'admin';
 
 	return (
-		<nav className="fixed top-0 left-0 right-0 h-16 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10">
+		<nav className="fixed top-0 left-0 right-0 h-16 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10 topbar">
 			<Link
 				to={'/'}
 				className="text-2xl font-semibold text-gray-700 hover:text-gray-800 flex gap-1 items-center mr-auto">
@@ -26,12 +26,14 @@ const TopNavbar = () => {
 				All Articles
 			</NavLink>
 
-			{user && isAdmin && (
+			{user?.email && isAdmin ? (
 				<NavLink
-					to={'/dashboard'}
+					to={'dashboard'}
 					className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
 					Dashboard
 				</NavLink>
+			) : (
+				''
 			)}
 
 			{user?.email ? (
