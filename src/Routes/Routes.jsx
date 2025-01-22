@@ -5,6 +5,7 @@ import LogIn from '../Pages/LogIn';
 import Register from '../Pages/Register';
 import PrivateRoute from './PrivateRoute';
 import PageNotFound from '../Pages/PageNotFound';
+import DashLayout from '../Layout/DashLayout';
 
 export const router = createBrowserRouter([
 	{
@@ -30,6 +31,16 @@ export const router = createBrowserRouter([
 						<h1>add articles</h1>
 					</PrivateRoute>
 				),
+			},
+		],
+	},
+	{
+		path: 'dashboard',
+		element: <DashLayout />,
+		children: [
+			{
+				path: 'users',
+				element: <h2>all users here</h2>,
 			},
 		],
 	},

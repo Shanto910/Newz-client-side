@@ -11,12 +11,12 @@ const MainLayout = () => {
 		return <Spinner />;
 	}
 	return (
-		<>
+		<div className="flex flex-col h-full">
 			<TopNavbar />
 			<div className="mt-16"></div>
 			<Outlet />
 			<Footer />
-		</>
+		</div>
 	);
 };
 

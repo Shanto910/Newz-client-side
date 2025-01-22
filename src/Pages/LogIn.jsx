@@ -12,7 +12,6 @@ const LogIn = () => {
 	const axiosPublic = useAxiosPublic();
 
 	const from = location.state?.from?.pathname || '/';
-	console.log(from);
 
 	const defaultOptions = {
 		loop: true,
