@@ -1,10 +1,11 @@
 import { Link, NavLink } from 'react-router-dom';
 import { GiNewspaper } from 'react-icons/gi';
 import useAuth from '../../Hooks/useAuth';
+import useAdmin from '../../Hooks/useAdmin';
 
 const TopNavbar = () => {
 	const { user, logOut } = useAuth();
-	const [isAdmin] = 'admin';
+	const [isAdmin] = useAdmin();
 
 	return (
 		<nav className="fixed top-0 left-0 right-0 h-16 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10 topbar">

@@ -61,6 +61,7 @@ const LogIn = () => {
 			const userInfo = {
 				email: result.user?.email,
 				name: result.user?.displayName,
+				photo: result.user?.photoURL,
 				premiumTaken: null,
 			};
 			await axiosPublic.post('/users', userInfo);

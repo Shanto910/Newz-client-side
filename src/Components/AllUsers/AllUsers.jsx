@@ -1,47 +1,37 @@
 import { RiAdminFill } from 'react-icons/ri';
 import { FaUser } from 'react-icons/fa';
-
-const trendingArticles = [
-	{
-		name: 'John Doe',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		email: 'newz@gmail.com',
-		_id: 1,
-	},
-	{
-		name: 'Jane Smith',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		email: 'newz@gmail.com',
-		_id: 2,
-	},
-	{
-		name: 'Emma Johnson',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		email: 'newz@gmail.com',
-		_id: 3,
-	},
-	{
-		name: 'Mark Brown',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		email: 'newz@gmail.com',
-		_id: 4,
-	},
-	{
-		name: 'Sophia Lee',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		email: 'newz@gmail.com',
-		_id: 5,
-	},
-	{
-		name: 'Oliver Davis',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		email: 'newz@gmail.com',
-		_id: 6,
-	},
-];
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 
 const AllUsers = () => {
-	const [isAdmin] = 'admin';
+	const axiosSecure = useAxiosSecure();
+	const { data: users = [], refetch } = useQuery({
+		queryKey: ['users'],
+		queryFn: async () => {
+			const res = await axiosSecure.get('/users');
+			return res.data;
+		},
+	});
+
+	const handleMakeAdmin = user => {
+		axiosSecure.patch(`/users/admin/${user._id}`).then(res => {
+			if (res.data.modifiedCount > 0) {
+				refetch();
+				Swal.fire({
+					icon: 'success',
+					title: `${user.name} Login Successful!`,
+					showConfirmButton: false,
+					showClass: {
+						popup: 'animate__animated animate__fadeInDown',
+					},
+					hideClass: {
+						popup: 'animate__animated animate__fadeOutUp',
+					},
+				});
+			}
+		});
+	};
 
 	return (
 		<div className="mt-8 lg:mt-12 w-full px-4 lg:px-8">
@@ -71,21 +61,23 @@ const AllUsers = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{trendingArticles.map(submission => (
+						{users.map(user => (
 							<tr
-								key={submission._id}
+								key={user._id}
 								className="bg-white border-b hover:bg-gray-50 text-lg font-medium">
 								<td className="px-6 py-4 flex justify-center">
 									<img
 										className="w-10 h-10 rounded-full object-cover"
-										src={submission.image}
+										src={user.photo}
 										alt=""
 									/>
 								</td>
-								<td className="px-6 py-4">{submission.name}</td>
-								<td className="px-6 py-4">{submission.email}</td>
-								<td className="px-6 py-4 flex justify-center">
-									{isAdmin === 'admin' ? (
+								<td className="px-6 py-4">{user.name}</td>
+								<td className="px-6 py-4">{user.email}</td>
+								<td
+									onClick={() => handleMakeAdmin(user)}
+									className="px-6 py-4 flex justify-center">
+									{user.role === 'admin' ? (
 										<RiAdminFill className="text-2xl text-red-400" />
 									) : (
 										<FaUser className="text-2xl text-blue-400" />

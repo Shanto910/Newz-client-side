@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import PageNotFound from '../Pages/PageNotFound';
 import DashLayout from '../Layout/DashLayout';
 import AllUsers from '../Components/AllUsers/AllUsers';
+import AdminRoute from './AdminRoute';
 
 export const router = createBrowserRouter([
 	{
@@ -38,9 +39,9 @@ export const router = createBrowserRouter([
 	{
 		path: 'dashboard',
 		element: (
-			<PrivateRoute>
+			<AdminRoute>
 				<DashLayout />
-			</PrivateRoute>
+			</AdminRoute>
 		),
 		children: [
 			{

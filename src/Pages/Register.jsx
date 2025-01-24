@@ -81,6 +81,7 @@ const Register = () => {
 			const userInfo = {
 				name: name,
 				email: email,
+				photo: photo,
 				premiumTaken: null,
 			};
 
