@@ -1,3 +1,6 @@
+import { RiAdminFill } from 'react-icons/ri';
+import { FaUser } from 'react-icons/fa';
+
 const trendingArticles = [
 	{
 		name: 'John Doe',
@@ -38,6 +41,8 @@ const trendingArticles = [
 ];
 
 const AllUsers = () => {
+	const [isAdmin] = 'admin';
+
 	return (
 		<div className="mt-8 lg:mt-12 w-full px-4 lg:px-8">
 			<div className="text-center mb-8">
@@ -60,8 +65,8 @@ const AllUsers = () => {
 							<th scope="col" className="py-3 px-6 text-left">
 								Email
 							</th>
-							<th scope="col" className="py-3 px-6 text-left">
-								Make Adimin
+							<th scope="col" className="py-3 px-6 text-center">
+								Role
 							</th>
 						</tr>
 					</thead>
@@ -79,7 +84,13 @@ const AllUsers = () => {
 								</td>
 								<td className="px-6 py-4">{submission.name}</td>
 								<td className="px-6 py-4">{submission.email}</td>
-								<td className="px-6 py-4">Admin</td>
+								<td className="px-6 py-4 flex justify-center">
+									{isAdmin === 'admin' ? (
+										<RiAdminFill className="text-2xl text-red-400" />
+									) : (
+										<FaUser className="text-2xl text-blue-400" />
+									)}
+								</td>
 							</tr>
 						))}
 					</tbody>
