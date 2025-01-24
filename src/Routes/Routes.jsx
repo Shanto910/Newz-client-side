@@ -6,6 +6,7 @@ import Register from '../Pages/Register';
 import PrivateRoute from './PrivateRoute';
 import PageNotFound from '../Pages/PageNotFound';
 import DashLayout from '../Layout/DashLayout';
+import AllUsers from '../Components/AllUsers/AllUsers';
 
 export const router = createBrowserRouter([
 	{
@@ -44,7 +45,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: 'users',
-				element: <h2>all users here</h2>,
+				element: <AllUsers />,
 			},
 		],
 	},

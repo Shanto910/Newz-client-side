@@ -11,9 +11,9 @@ const DashLayout = () => {
 	}
 
 	return (
-		<div className="flex gap-6 h-full">
+		<div className="flex gap-16 h-full">
 			<SideNavbar />
-			<div className="w-14"></div>
+			<div className="basis-14 lg:basis-48"></div>
 			<Outlet />
 		</div>
 	);

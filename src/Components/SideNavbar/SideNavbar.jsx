@@ -9,7 +9,7 @@ import { MdArticle } from 'react-icons/md';
 
 const SideNavbar = () => {
 	return (
-		<nav className="fixed w-14 h-full text-gray-400 bg-gray-800 overflow-hidden sidebar hover:w-40 transition-all duration-300 ease-in-out">
+		<nav className="fixed lg:w-40 w-14 h-full text-gray-400 bg-gray-800 overflow-hidden sidebar hover:w-40 transition-all duration-300 ease-in-out">
 			<div className="w-40 h-full">
 				<Link to={'/'} className="grid grid-cols-7 items-center gap-4 w-full px-3 py-3">
 					<GiNewspaper className="w-8 h-8 fill-current col-span-2" />
