@@ -5,12 +5,12 @@ import TrandingArticles from '../Components/TrandingArticles/TrandingArticles';
 
 const Home = () => {
 	return (
-		<div>
+		<>
 			<TrandingArticles />
 			<AllPublishers />
 			<HomeUserStatistics />
 			<SubscriptionPlans />
-		</div>
+		</>
 	);
 };
 

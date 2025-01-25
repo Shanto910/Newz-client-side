@@ -9,6 +9,7 @@ import DashLayout from '../Layout/DashLayout';
 import AllUsers from '../Pages/AllUsers';
 import AdminRoute from './AdminRoute';
 import AddPublisher from '../Pages/AddPublisher';
+import AddArticles from '../Pages/AddArticles';
 
 export const router = createBrowserRouter([
 	{
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
 				path: '/add-articles',
 				element: (
 					<PrivateRoute>
-						<h1>add articles</h1>
+						<AddArticles />
 					</PrivateRoute>
 				),
 			},

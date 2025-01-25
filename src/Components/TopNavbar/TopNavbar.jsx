@@ -27,6 +27,16 @@ const TopNavbar = () => {
 				All Articles
 			</NavLink>
 
+			{user?.email ? (
+				<NavLink
+					to={'/add-articles'}
+					className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+					Add article
+				</NavLink>
+			) : (
+				''
+			)}
+
 			{user?.email && isAdmin ? (
 				<NavLink
 					to={'dashboard'}
