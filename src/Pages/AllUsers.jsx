@@ -1,6 +1,6 @@
 import { RiAdminFill } from 'react-icons/ri';
 import { FaUser } from 'react-icons/fa';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 
@@ -76,7 +76,7 @@ const AllUsers = () => {
 								<td className="px-6 py-4">{user.email}</td>
 								<td
 									onClick={() => handleMakeAdmin(user)}
-									className="px-6 py-4 flex justify-center">
+									className="px-6 py-4 flex justify-center cursor-pointer">
 									{user.role === 'admin' ? (
 										<RiAdminFill className="text-2xl text-red-400" />
 									) : (

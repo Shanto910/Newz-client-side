@@ -6,8 +6,9 @@ import Register from '../Pages/Register';
 import PrivateRoute from './PrivateRoute';
 import PageNotFound from '../Pages/PageNotFound';
 import DashLayout from '../Layout/DashLayout';
-import AllUsers from '../Components/AllUsers/AllUsers';
+import AllUsers from '../Pages/AllUsers';
 import AdminRoute from './AdminRoute';
+import AddPublisher from '../Pages/AddPublisher';
 
 export const router = createBrowserRouter([
 	{
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'users',
 				element: <AllUsers />,
+			},
+			{
+				path: 'addPublisher',
+				element: <AddPublisher />,
 			},
 		],
 	},
