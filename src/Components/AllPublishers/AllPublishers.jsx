@@ -1,41 +1,18 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-
-const trendingArticles = [
-	{
-		name: 'John Doe',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		_id: 1,
-	},
-	{
-		name: 'Jane Smith',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		_id: 2,
-	},
-	{
-		name: 'Emma Johnson',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		_id: 3,
-	},
-	{
-		name: 'Mark Brown',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		_id: 4,
-	},
-	{
-		name: 'Sophia Lee',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		_id: 5,
-	},
-	{
-		name: 'Oliver Davis',
-		image: 'https://i.ibb.co.com/5kk9L0K/buddy.jpg',
-		_id: 6,
-	},
-];
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const AllPublishers = () => {
+	const axiosSecure = useAxiosSecure();
+	const { data: publishers = [] } = useQuery({
+		queryKey: ['publishers'],
+		queryFn: async () => {
+			const res = await axiosSecure.get('/publisher');
+			return res.data;
+		},
+	});
 	return (
 		<div className="max-w-screen-xl mx-auto mb-12 md:mb-24">
 			<div className="text-center mb-8">
@@ -53,7 +30,7 @@ const AllPublishers = () => {
 				centeredSlides={true}
 				autoplay={{ delay: 2000 }}
 				speed={500}
-				loop={true}
+				loop={publishers.length >= 4}
 				modules={[Autoplay]}
 				breakpoints={{
 					425: {
@@ -67,14 +44,14 @@ const AllPublishers = () => {
 					},
 				}}
 				className="mySwiper bg-gray-100">
-				{trendingArticles.map(banner => (
-					<SwiperSlide key={banner._id} className="min-w-fit">
+				{publishers.map(publisher => (
+					<SwiperSlide key={publisher._id} className="min-w-fit">
 						<div className="flex gap-4 justify-center items-center py-10">
 							<img
-								src={banner.image}
+								src={publisher.image}
 								className="w-10 h-10 rounded-full object-cover"
 							/>
-							<p className="font-bold text-2xl text-gray-500">{banner.name}</p>
+							<p className="font-bold text-2xl text-gray-500">{publisher.name}</p>
 						</div>
 					</SwiperSlide>
 				))}
