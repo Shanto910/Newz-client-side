@@ -11,6 +11,7 @@ import AdminRoute from './AdminRoute';
 import AddPublisher from '../Pages/AddPublisher';
 import AddArticles from '../Pages/AddArticles';
 import ManageArticles from '../Pages/ManageArticles';
+import AllArticles from '../Pages/AllArticles';
 
 export const router = createBrowserRouter([
 	{
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <Home />,
+			},
+			{
+				path: '/all-articles',
+				element: <AllArticles />,
 			},
 			{
 				path: '/login',

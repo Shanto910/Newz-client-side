@@ -8,14 +8,14 @@ const ManageArticles = () => {
 	const { data: articles = [], refetch } = useQuery({
 		queryKey: ['articles'],
 		queryFn: async () => {
-			const res = await axiosSecure.get('/articles');
+			const res = await axiosSecure.get('/admin/articles');
 			return res.data;
 		},
 	});
 
 	const handleApprove = async id => {
 		try {
-			const res = await axiosSecure.patch(`/articles/${id}`, { status: 'approved' });
+			const res = await axiosSecure.patch(`/admin/articles/${id}`, { status: 'approved' });
 			if (res.data.modifiedCount > 0) {
 				Swal.fire('Success', 'Article approved successfully', 'success');
 				refetch();
@@ -28,7 +28,7 @@ const ManageArticles = () => {
 
 	const handleDecline = async (id, reason) => {
 		try {
-			const res = await axiosSecure.patch(`/articles/${id}`, {
+			const res = await axiosSecure.patch(`/admin/articles/${id}`, {
 				status: 'declined',
 				feedback: reason,
 			});
@@ -67,7 +67,7 @@ const ManageArticles = () => {
 
 	const handleDelete = async id => {
 		try {
-			const res = await axiosSecure.delete(`/articles/${id}`);
+			const res = await axiosSecure.delete(`/admin/articles/${id}`);
 			if (res.data.deletedCount > 0) {
 				Swal.fire('Success', 'Article deleted successfully', 'success');
 				refetch();
@@ -99,7 +99,9 @@ const ManageArticles = () => {
 
 	const handleMakePremium = async id => {
 		try {
-			const res = await axiosSecure.patch(`/articles/${id}`, { articleType: 'premium' });
+			const res = await axiosSecure.patch(`/admin/articles/${id}`, {
+				articleType: 'premium',
+			});
 			if (res.data.modifiedCount > 0) {
 				Swal.fire('Success', 'Article marked as premium', 'success');
 				refetch();
@@ -111,7 +113,7 @@ const ManageArticles = () => {
 	};
 
 	return (
-		<div className="max-w-screen-xl mx-auto mt-8 md:mt-12 mb-12 md:mb-24 w-full text-nowrap">
+		<div className="max-w-7xl mx-auto mt-8 md:mt-12 mb-12 md:mb-24 text-nowrap px-4 lg:px-8">
 			<div className="text-center mb-8">
 				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">All Articles</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
@@ -138,7 +140,7 @@ const ManageArticles = () => {
 							<tr key={article._id}>
 								<td className="px-4 py-2 flex justify-center">
 									<img
-										className="w-10 h-10 rounded-full"
+										className="w-10 h-10 rounded-full object-cover"
 										src={article.author_photo}
 										alt=""
 									/>

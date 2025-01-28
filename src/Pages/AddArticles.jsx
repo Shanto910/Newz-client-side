@@ -103,7 +103,7 @@ const AddArticles = () => {
 					author_photo: user?.photoURL,
 				};
 
-				const articleRes = await axiosSecure.post('/articles', articleInfo);
+				const articleRes = await axiosSecure.post('/articles/pending', articleInfo);
 
 				if (articleRes.data.insertedId) {
 					Swal.fire({
