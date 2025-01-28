@@ -12,6 +12,8 @@ import AddPublisher from '../Pages/AddPublisher';
 import AddArticles from '../Pages/AddArticles';
 import ManageArticles from '../Pages/ManageArticles';
 import AllArticles from '../Pages/AllArticles';
+import MyProfile from '../Pages/MyProfile';
+import MyArticles from '../Pages/MyArticles';
 
 export const router = createBrowserRouter([
 	{
@@ -33,6 +35,22 @@ export const router = createBrowserRouter([
 			{
 				path: '/register',
 				element: <Register />,
+			},
+			{
+				path: '/my-profile',
+				element: (
+					<PrivateRoute>
+						<MyProfile />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: '/my-articles',
+				element: (
+					<PrivateRoute>
+						<MyArticles />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: '/add-articles',

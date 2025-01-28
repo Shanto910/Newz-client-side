@@ -28,11 +28,18 @@ const TopNavbar = () => {
 			</NavLink>
 
 			{user?.email ? (
-				<NavLink
-					to={'/add-articles'}
-					className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
-					Add article
-				</NavLink>
+				<>
+					<NavLink
+						to={'/add-articles'}
+						className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+						Add article
+					</NavLink>
+					<NavLink
+						to={'/my-articles'}
+						className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+						My article
+					</NavLink>
+				</>
 			) : (
 				''
 			)}
@@ -49,11 +56,14 @@ const TopNavbar = () => {
 
 			{user?.email ? (
 				<>
-					<img
-						className="w-10 h-10 rounded-full object-cover"
-						referrerPolicy="no-referrer"
-						src={user.photoURL}
-					/>
+					<Link to={'/my-profile'}>
+						<img
+							className="w-10 h-10 rounded-full object-cover"
+							referrerPolicy="no-referrer"
+							src={user.photoURL}
+						/>
+					</Link>
+
 					<button
 						onClick={logOut}
 						className="font-medium text-gray-700 underline hover:text-gray-800 hover:no-underline">
