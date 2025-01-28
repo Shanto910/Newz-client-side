@@ -4,6 +4,7 @@ import Select from 'react-select';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
+import useAuth from '../Hooks/useAuth';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -43,6 +44,7 @@ const AddArticles = () => {
 	const [selectedTags, setSelectedTags] = useState([]);
 	const axiosPublic = useAxiosPublic();
 	const axiosSecure = useAxiosSecure();
+	const { user } = useAuth();
 	const { data: publishers = [] } = useQuery({
 		queryKey: ['publishers'],
 		queryFn: async () => {
@@ -96,6 +98,9 @@ const AddArticles = () => {
 					articleType: 'normal',
 					status: 'pending',
 					image: res.data.data.display_url,
+					author_name: user?.displayName,
+					author_email: user?.email,
+					author_photo: user?.photoURL,
 				};
 
 				const articleRes = await axiosSecure.post('/articles', articleInfo);
@@ -114,7 +119,7 @@ const AddArticles = () => {
 				throw new Error('Image upload failed');
 			}
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			Swal.fire({
 				icon: 'error',
 				title: 'Submission failed',

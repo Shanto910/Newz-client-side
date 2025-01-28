@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
 			return await createUserWithEmailAndPassword(auth, email, password);
 		} catch (error) {
 			setLoading(false);
-			console.log(error.message);
+			console.error(error.message);
 			throw error;
 		}
 	};
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
 			return await signInWithEmailAndPassword(auth, email, password);
 		} catch (error) {
 			setLoading(false);
-			console.log(error.message);
+			console.error(error.message);
 			throw error;
 		}
 	};
@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
 			return await signInWithPopup(auth, googleProvider);
 		} catch (error) {
 			setLoading(false);
-			console.log(error.message);
+			console.error(error.message);
 			throw error;
 		}
 	};
@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
 			return await signOut(auth);
 		} catch (error) {
 			setLoading(false);
-			console.log(error.message);
+			console.error(error.message);
 			throw error;
 		}
 	};
@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
 				photoURL: photo,
 			});
 		} catch (error) {
-			console.log(error.message);
+			console.error(error.message);
 			throw error;
 		}
 	};

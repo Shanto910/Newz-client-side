@@ -55,7 +55,7 @@ const AddPublisher = () => {
 				throw new Error('Image upload failed');
 			}
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			Swal.fire({
 				icon: 'error',
 				title: 'Submission failed',
