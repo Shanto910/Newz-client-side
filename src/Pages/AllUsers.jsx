@@ -3,16 +3,46 @@ import { FaUser } from 'react-icons/fa';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 const AllUsers = () => {
 	const axiosSecure = useAxiosSecure();
-	const { data: users = [], refetch } = useQuery({
-		queryKey: ['users'],
+	const [currentPage, setCurrentPage] = useState(1);
+	const userPerPage = 5;
+
+	const { data, refetch } = useQuery({
+		queryKey: ['users', currentPage],
 		queryFn: async () => {
-			const res = await axiosSecure.get('/users');
+			const res = await axiosSecure.get(`/users?page=${currentPage}&limit=${userPerPage}`);
 			return res.data;
 		},
 	});
+
+	const users = data?.users || [];
+	const totalPages = data?.totalPages || 1;
+
+	const handlePageChange = newPage => {
+		if (newPage > 0 && newPage <= totalPages) {
+			setCurrentPage(newPage);
+		}
+	};
+
+	const renderPagination = () => {
+		const buttons = [];
+		for (let i = 1; i <= totalPages; i++) {
+			buttons.push(
+				<button
+					key={i}
+					onClick={() => handlePageChange(i)}
+					className={`px-3 py-1 ${
+						currentPage === i ? 'bg-gray-500 text-white' : 'bg-gray-200'
+					}`}>
+					{i}
+				</button>
+			);
+		}
+		return buttons;
+	};
 
 	const handleMakeAdmin = user => {
 		axiosSecure.patch(`/users/admin/${user._id}`).then(res => {
@@ -87,6 +117,21 @@ const AllUsers = () => {
 						))}
 					</tbody>
 				</table>
+			</div>
+			<div className="flex justify-center items-center gap-4 mt-6">
+				<button
+					onClick={() => handlePageChange(currentPage - 1)}
+					disabled={currentPage === 1}
+					className="px-3 py-1 bg-gray-200 disabled:opacity-50">
+					Prev
+				</button>
+				<div className="flex gap-2">{renderPagination()}</div>
+				<button
+					onClick={() => handlePageChange(currentPage + 1)}
+					disabled={currentPage === totalPages}
+					className="px-3 py-1 bg-gray-200 disabled:opacity-50">
+					Next
+				</button>
 			</div>
 		</div>
 	);
