@@ -2,16 +2,48 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FiTrash, FiCheck, FiX, FiStar } from 'react-icons/fi';
+import { useState } from 'react';
 
 const ManageArticles = () => {
 	const axiosSecure = useAxiosSecure();
-	const { data: articles = [], refetch } = useQuery({
-		queryKey: ['articles'],
+	const [currentPage, setCurrentPage] = useState(1);
+	const articlesPerPage = 5;
+
+	const { data, refetch } = useQuery({
+		queryKey: ['articles', currentPage],
 		queryFn: async () => {
-			const res = await axiosSecure.get('/admin/articles');
+			const res = await axiosSecure.get(
+				`/admin/articles?page=${currentPage}&limit=${articlesPerPage}`
+			);
 			return res.data;
 		},
 	});
+
+	const articles = data?.articles || [];
+	const totalPages = data?.totalPages || 1;
+
+	const handlePageChange = newPage => {
+		if (newPage > 0 && newPage <= totalPages) {
+			setCurrentPage(newPage);
+		}
+	};
+
+	const renderPagination = () => {
+		const buttons = [];
+		for (let i = 1; i <= totalPages; i++) {
+			buttons.push(
+				<button
+					key={i}
+					onClick={() => handlePageChange(i)}
+					className={`px-3 py-1 ${
+						currentPage === i ? 'bg-gray-500 text-white' : 'bg-gray-200'
+					}`}>
+					{i}
+				</button>
+			);
+		}
+		return buttons;
+	};
 
 	const handleApprove = async id => {
 		try {
@@ -180,6 +212,21 @@ const ManageArticles = () => {
 						))}
 					</tbody>
 				</table>
+			</div>
+			<div className="flex justify-center items-center gap-4 mt-6">
+				<button
+					onClick={() => handlePageChange(currentPage - 1)}
+					disabled={currentPage === 1}
+					className="px-3 py-1 bg-gray-200 disabled:opacity-50">
+					Prev
+				</button>
+				<div className="flex gap-2">{renderPagination()}</div>
+				<button
+					onClick={() => handlePageChange(currentPage + 1)}
+					disabled={currentPage === totalPages}
+					className="px-3 py-1 bg-gray-200 disabled:opacity-50">
+					Next
+				</button>
 			</div>
 		</div>
 	);
