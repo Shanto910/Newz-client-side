@@ -14,6 +14,7 @@ import ManageArticles from '../Pages/ManageArticles';
 import AllArticles from '../Pages/AllArticles';
 import MyProfile from '../Pages/MyProfile';
 import MyArticles from '../Pages/MyArticles';
+import Dashboard from '../Pages/Dashboard';
 
 export const router = createBrowserRouter([
 	{
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
 			</AdminRoute>
 		),
 		children: [
+			{
+				path: '',
+				element: <Dashboard />,
+			},
 			{
 				path: 'users',
 				element: <AllUsers />,
