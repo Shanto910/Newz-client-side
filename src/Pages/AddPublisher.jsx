@@ -65,9 +65,9 @@ const AddPublisher = () => {
 	};
 
 	return (
-		<div className="mt-8 lg:mt-12 w-full px-4 lg:px-8">
-			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">Add Publisher</h2>
+		<div className="w-full px-4 mt-8 lg:mt-12 lg:px-8">
+			<div className="mb-8 text-center">
+				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">Add Publisher</h2>
 				<p className="text-xl max-w-[48ch] mx-auto text-gray-500">
 					Add renowned publishers to better group news articles
 				</p>
@@ -75,8 +75,8 @@ const AddPublisher = () => {
 
 			<form
 				onSubmit={onSubmit}
-				className="max-w-2xl mx-auto mt-12 flex flex-col items-center justify-center w-full gap-6">
-				<label className="block text-sm font-medium text-gray-900 w-full" htmlFor="name">
+				className="flex flex-col items-center justify-center w-full max-w-2xl gap-6 mx-auto mt-12">
+				<label className="block w-full text-sm font-medium text-gray-900" htmlFor="name">
 					Publisher Name
 					<input
 						type="text"
@@ -88,7 +88,7 @@ const AddPublisher = () => {
 					/>
 				</label>
 
-				<label className="block text-sm font-medium text-gray-900 w-full" htmlFor="photo">
+				<label className="block w-full text-sm font-medium text-gray-900" htmlFor="photo">
 					Publisher Image
 					<input
 						name="photo"
@@ -97,7 +97,7 @@ const AddPublisher = () => {
 						type="file"
 					/>
 				</label>
-				<button className="text-white bg-gray-700 hover:bg-gray-800 px-4 py-2 border border-gray-700 hover:border-gray-800 transition duration-300 w-full">
+				<button className="w-full px-4 py-2 text-white transition duration-300 bg-gray-700 border border-gray-700 hover:bg-gray-800 hover:border-gray-800">
 					Submit
 				</button>
 			</form>
