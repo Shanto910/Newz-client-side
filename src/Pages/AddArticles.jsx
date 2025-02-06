@@ -89,6 +89,20 @@ const AddArticles = () => {
 			});
 
 			if (res.data.success) {
+				const userInfo = await axiosSecure.get(`/users/${user?.email}`);
+				const isPremiumUser = userInfo.data?.premiumTaken;
+
+				if (!isPremiumUser) {
+					const existingArticles = await axiosSecure.get(`/articles/user/${user?.email}`);
+					if (existingArticles.data.length > 0) {
+						Swal.fire({
+							icon: 'error',
+							title: 'Submission failed',
+							text: 'Normal users can only post one article. Upgrade to premium for unlimited posts.',
+						});
+						return;
+					}
+				}
 				const articleInfo = {
 					title,
 					publisher,
@@ -124,15 +138,15 @@ const AddArticles = () => {
 			Swal.fire({
 				icon: 'error',
 				title: 'Submission failed',
-				text: 'Something went wrong. Please try again.',
+				text: error.response?.data?.message || 'Something went wrong. Please try again.',
 			});
 		}
 	};
 
 	return (
-		<div className="max-w-screen-xl mx-auto mt-8 md:mt-12 mb-12 md:mb-24">
-			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">Add Article</h2>
+		<div className="max-w-screen-xl mx-auto mt-8 mb-12 md:mt-12 md:mb-24">
+			<div className="mb-8 text-center">
+				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">Add Article</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
 					Submit Your Story: Share the Latest News with Our Community
 				</p>
@@ -156,7 +170,7 @@ const AddArticles = () => {
 							/>
 						</div>
 
-						<div className="flex flex-col md:flex-row gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<div className="w-full">
 								<label className="block mb-2 text-sm font-medium text-gray-900">
 									Tags
