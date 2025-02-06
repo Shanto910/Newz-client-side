@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
+import useAuth from '../Hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 const AllArticles = () => {
 	const axiosSecure = useAxiosSecure();
 	const axiosPublic = useAxiosPublic();
+	const { user } = useAuth();
 	const [title, setTitle] = useState('');
 	const [publisher, setPublisher] = useState('');
 	const [tags, setTags] = useState('');
@@ -32,26 +34,37 @@ const AllArticles = () => {
 		},
 	});
 
+	const { data: userInfo } = useQuery({
+		queryKey: ['userInfo', user?.email],
+		queryFn: async () => {
+			if (user?.email) {
+				const { data } = await axiosSecure.get(`/users/${user.email}`);
+				return data;
+			}
+			return null;
+		},
+	});
+
 	return (
-		<div className="mt-8 md:mt-12 mb-12 md:mb-24 px-4 lg:px-8">
-			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">All Articles</h2>
+		<div className="px-4 mt-8 mb-12 md:mt-12 md:mb-24 lg:px-8">
+			<div className="mb-8 text-center">
+				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">All Articles</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
 					All the articles available to read
 				</p>
 			</div>
 
-			<div className="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row gap-4 justify-between">
+			<div className="flex flex-col justify-between gap-4 mx-auto mb-8 max-w-7xl md:flex-row">
 				<input
 					type="text"
 					placeholder="Search by title"
-					className="border p-2 w-full md:w-1/3"
+					className="w-full p-2 border md:w-1/3"
 					value={title}
 					onChange={e => setTitle(e.target.value)}
 				/>
 
 				<select
-					className="border p-2 w-full md:w-1/4"
+					className="w-full p-2 border md:w-1/4"
 					value={publisher}
 					onChange={e => setPublisher(e.target.value)}>
 					<option value="">All Publishers</option>
@@ -65,13 +78,13 @@ const AllArticles = () => {
 				<input
 					type="text"
 					placeholder="Filter by tags (comma-separated)"
-					className="border p-2 w-full md:w-1/3"
+					className="w-full p-2 border md:w-1/3"
 					value={tags}
 					onChange={e => setTags(e.target.value)}
 				/>
 			</div>
 
-			<div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			<div className="grid grid-cols-1 gap-6 mx-auto max-w-7xl md:grid-cols-2 lg:grid-cols-3">
 				{articles.map(article => (
 					<div
 						key={article._id}
@@ -83,27 +96,32 @@ const AllArticles = () => {
 						<img
 							src={article.image}
 							alt={article.title}
-							className="w-full h-48 object-cover mb-4"
+							className="object-cover w-full h-48 mb-4"
 						/>
-						<h3 className="text-xl font-semibold mb-2">{article.title}</h3>
-						<p className="text-gray-500 mb-4 text-ellipsis-custom">
+						<h3 className="mb-2 text-xl font-semibold">{article.title}</h3>
+						<p className="mb-4 text-gray-500 text-ellipsis-custom">
 							{article.description}
 						</p>
 						<p className="text-sm text-gray-400">Publisher: {article.publisher}</p>
 						{article.tags && (
-							<div className="mt-2 flex flex-wrap gap-2">
+							<div className="flex flex-wrap gap-2 mt-2">
 								{article.tags.map((tag, index) => (
 									<span
 										key={index}
-										className="px-2 py-1 bg-gray-100 text-gray-600 text-sm mb-5">
+										className="px-2 py-1 mb-5 text-sm text-gray-600 bg-gray-100">
 										{tag}
 									</span>
 								))}
 							</div>
 						)}
 						<Link
-							to={`/article/details/${article._id}`}
-							className="inline-block text-center font-semibold bg-gray-700 text-gray-100 w-full py-4 hover:bg-gray-800 transition-all duration-300 mt-auto">
+							to={`articles/${article._id}`}
+							className={`py-3 mt-auto text-white text-center ${
+								article.articleType === 'premium' && !userInfo?.premiumTaken
+									? 'bg-gray-400 pointer-events-none'
+									: 'bg-gray-700 hover:bg-gray-800'
+							}`}
+							disabled={article.articleType === 'premium' && !userInfo?.premiumTaken}>
 							Read more
 						</Link>
 					</div>

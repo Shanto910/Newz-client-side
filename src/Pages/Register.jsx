@@ -82,7 +82,7 @@ const Register = () => {
 				name: name,
 				email: email,
 				photo: photo,
-				premiumTaken: null,
+				premiumTaken: false,
 			};
 
 			const dbResponse = await axiosPublic.post('/users', userInfo);
@@ -105,44 +105,44 @@ const Register = () => {
 	};
 
 	return (
-		<div className="text-gray-800 flex justify-center my-auto px-4 md:px-8">
-			<div className="max-w-fit lg:max-w-screen-lg m-0 sm:m-10 shadow-md flex justify-center flex-1 bg-white">
+		<div className="flex justify-center px-4 my-auto text-gray-800 md:px-8">
+			<div className="flex justify-center flex-1 m-0 bg-white shadow-md max-w-fit lg:max-w-screen-lg sm:m-10">
 				<div className="flex-1 bg-[#DDE3F0] hidden lg:flex justify-center items-center">
 					<Lottie options={defaultOptions} loop autoplay height={400} width={400} />
 				</div>
-				<div className="lg:w-1/2 p-6 sm:p-12">
+				<div className="p-6 lg:w-1/2 sm:p-12">
 					<div className="flex flex-col items-center">
-						<h1 className="text-2xl xl:text-3xl font-extrabold">Hello, there!</h1>
-						<div className="w-full flex-1 mt-8">
-							<form onSubmit={handleRegister} className="mx-auto max-w-xs">
+						<h1 className="text-2xl font-extrabold xl:text-3xl">Hello, there!</h1>
+						<div className="flex-1 w-full mt-8">
+							<form onSubmit={handleRegister} className="max-w-xs mx-auto">
 								<input
-									className="w-full px-8 py-4 font-medium border border-gray-200 placeholder-gray-500 text-sm"
+									className="w-full px-8 py-4 text-sm font-medium placeholder-gray-500 border border-gray-200"
 									type="text"
 									name="name"
 									placeholder="Name"
 								/>
 								<input
-									className="w-full px-8 py-4 font-medium border border-gray-200 placeholder-gray-500 text-sm mt-5"
+									className="w-full px-8 py-4 mt-5 text-sm font-medium placeholder-gray-500 border border-gray-200"
 									type="email"
 									name="email"
 									placeholder="Email"
 								/>
 								<input
-									className="w-full px-8 py-4 font-medium border border-gray-200 placeholder-gray-500 text-sm mt-5"
+									className="w-full px-8 py-4 mt-5 text-sm font-medium placeholder-gray-500 border border-gray-200"
 									type="password"
 									name="password"
 									placeholder="Password"
 								/>
 								<input
-									className="w-full px-8 py-4 font-medium border border-gray-200 placeholder-gray-500 text-sm mt-5"
+									className="w-full px-8 py-4 mt-5 text-sm font-medium placeholder-gray-500 border border-gray-200"
 									type="text"
 									name="photo"
 									placeholder="Photo URL"
 								/>
-								<button className="tracking-wide font-semibold bg-gray-700 text-gray-100 w-full py-4 hover:bg-gray-800 transition-all duration-300 mt-5">
+								<button className="w-full py-4 mt-5 font-semibold tracking-wide text-gray-100 transition-all duration-300 bg-gray-700 hover:bg-gray-800">
 									Register
 								</button>
-								<span className="text-gray-600 mt-2 inline-block">
+								<span className="inline-block mt-2 text-gray-600">
 									Already have an account?{' '}
 									<Link to={'/login'} className="text-gray-900">
 										Login here.

@@ -8,22 +8,22 @@ const TopNavbar = () => {
 	const [isAdmin] = useAdmin();
 
 	return (
-		<nav className="fixed top-0 left-0 right-0 h-16 px-4 md:px-8 flex items-center gap-4 bg-white backdrop-blur-md bg-opacity-20 shadow-sm z-10 topbar">
+		<nav className="fixed top-0 left-0 right-0 z-10 flex items-center h-16 gap-4 px-4 bg-white shadow-sm md:px-8 backdrop-blur-md bg-opacity-20 topbar">
 			<Link
 				to={'/'}
-				className="text-2xl font-semibold text-gray-700 hover:text-gray-800 flex gap-1 items-center mr-auto">
+				className="flex items-center gap-1 mr-auto text-2xl font-semibold text-gray-700 hover:text-gray-800">
 				<GiNewspaper className="text-5xl" />
 				<span>Newz</span>
 			</Link>
 
 			<NavLink
 				to={'/'}
-				className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+				className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
 				Home
 			</NavLink>
 			<NavLink
 				to={'/all-articles'}
-				className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+				className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
 				All Articles
 			</NavLink>
 
@@ -31,12 +31,12 @@ const TopNavbar = () => {
 				<>
 					<NavLink
 						to={'/add-articles'}
-						className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+						className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
 						Add article
 					</NavLink>
 					<NavLink
 						to={'/my-articles'}
-						className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+						className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
 						My article
 					</NavLink>
 				</>
@@ -47,7 +47,7 @@ const TopNavbar = () => {
 			{user?.email && isAdmin ? (
 				<NavLink
 					to={'dashboard'}
-					className="text-gray-600 hover:text-gray-800 font-semibold transition duration-300 h-full md:flex items-center hidden">
+					className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
 					Dashboard
 				</NavLink>
 			) : (
@@ -58,7 +58,7 @@ const TopNavbar = () => {
 				<>
 					<Link to={'/my-profile'}>
 						<img
-							className="w-10 h-10 rounded-full object-cover"
+							className="object-cover w-10 h-10 rounded-full"
 							referrerPolicy="no-referrer"
 							src={user.photoURL}
 						/>
@@ -74,12 +74,12 @@ const TopNavbar = () => {
 				<>
 					<Link
 						to={'/login'}
-						className="text-white bg-gray-700 hover:bg-gray-800 px-4 py-2 border border-gray-700 hover:border-gray-800 transition duration-300">
+						className="px-4 py-2 text-white transition duration-300 bg-gray-700 border border-gray-700 hover:bg-gray-800 hover:border-gray-800">
 						Login
 					</Link>
 					<Link
 						to={'/register'}
-						className="text-gray-800 bg-white hover:bg-gray-800 hover:text-white px-4 py-2 border border-gray-800 box-border transition duration-300">
+						className="box-border px-4 py-2 text-gray-800 transition duration-300 bg-white border border-gray-800 hover:bg-gray-800 hover:text-white">
 						Register
 					</Link>
 				</>

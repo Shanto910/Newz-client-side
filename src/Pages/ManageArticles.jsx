@@ -145,16 +145,16 @@ const ManageArticles = () => {
 	};
 
 	return (
-		<div className="max-w-7xl mx-auto mt-8 md:mt-12 mb-12 md:mb-24 text-nowrap px-4 lg:px-8">
-			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">All Articles</h2>
+		<div className="px-4 mx-auto mt-8 mb-12 max-w-7xl md:mt-12 md:mb-24 text-nowrap lg:px-8">
+			<div className="mb-8 text-center">
+				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">All Articles</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
 					Manage all submitted articles
 				</p>
 			</div>
 
-			<div className=" bg-white shadow p-6 w-full overflow-x-auto">
-				<table className="table-auto w-full text-left border-collapse">
+			<div className="w-full p-6 overflow-x-auto bg-white shadow ">
+				<table className="w-full text-left border-collapse table-auto">
 					<thead>
 						<tr>
 							<th className="px-4 py-2">Author Photo</th>
@@ -170,11 +170,12 @@ const ManageArticles = () => {
 					<tbody>
 						{articles.map(article => (
 							<tr key={article._id}>
-								<td className="px-4 py-2 flex justify-center">
+								<td className="flex justify-center px-4 py-2">
 									<img
-										className="w-10 h-10 rounded-full object-cover"
+										className="object-cover w-10 h-10 rounded-full"
 										src={article.author_photo}
 										alt=""
+										referrerPolicy="no-referrer"
 									/>
 								</td>
 								<td className="px-4 py-2">{article.author_name}</td>
@@ -187,18 +188,18 @@ const ManageArticles = () => {
 								<td className="px-4 py-2">{article.publisher}</td>
 								<td className="px-4 py-2">
 									<button
-										className="text-green-600 hover:text-green-800 mr-4"
+										className="mr-4 text-green-600 hover:text-green-800"
 										onClick={() => handleApprove(article._id)}>
 										<FiCheck />
 									</button>
 									<button
-										className="text-red-600 hover:text-red-800  mr-4"
+										className="mr-4 text-red-600 hover:text-red-800"
 										onClick={() => showDeclineModal(article._id)}>
 										<FiX />
 									</button>
 
 									<button
-										className="text-yellow-600 hover:text-yellow-800  mr-4"
+										className="mr-4 text-yellow-600 hover:text-yellow-800"
 										onClick={() => handleMakePremium(article._id)}>
 										<FiStar />
 									</button>
@@ -213,7 +214,7 @@ const ManageArticles = () => {
 					</tbody>
 				</table>
 			</div>
-			<div className="flex justify-center items-center gap-4 mt-6">
+			<div className="flex items-center justify-center gap-4 mt-6">
 				<button
 					onClick={() => handlePageChange(currentPage - 1)}
 					disabled={currentPage === 1}

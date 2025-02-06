@@ -3,7 +3,7 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Select from 'react-select';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -45,13 +45,6 @@ const AddArticles = () => {
 	const axiosPublic = useAxiosPublic();
 	const axiosSecure = useAxiosSecure();
 	const { user } = useAuth();
-	const [userData, setUserData] = useState(null);
-
-	useEffect(() => {
-		axiosSecure.get(`/users/${user?.email}`).then(res => {
-			setUserData(res.data);
-		});
-	}, [user]);
 
 	const { data: publishers = [] } = useQuery({
 		queryKey: ['publishers'],
@@ -67,15 +60,6 @@ const AddArticles = () => {
 
 	const onSubmit = async e => {
 		e.preventDefault();
-
-		if (!userData?.premiumTaken && userData?.articleCount >= 1) {
-			Swal.fire({
-				icon: 'error',
-				title: 'Limit Reached!',
-				text: 'Normal users can only submit one article. Upgrade to premium for unlimited posts.',
-			});
-			return;
-		}
 
 		const form = e.target;
 		const title = form.title.value;
@@ -144,6 +128,7 @@ const AddArticles = () => {
 			});
 		}
 	};
+
 	return (
 		<div className="max-w-screen-xl mx-auto mt-8 md:mt-12 mb-12 md:mb-24">
 			<div className="text-center mb-8">

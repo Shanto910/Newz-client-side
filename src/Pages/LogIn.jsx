@@ -62,7 +62,7 @@ const LogIn = () => {
 				email: result.user?.email,
 				name: result.user?.displayName,
 				photo: result.user?.photoURL,
-				premiumTaken: null,
+				premiumTaken: false,
 			};
 			await axiosPublic.post('/users', userInfo);
 			Swal.fire({
@@ -91,15 +91,15 @@ const LogIn = () => {
 	};
 
 	return (
-		<div className="text-gray-800 flex justify-center my-auto px-4 md:px-8">
-			<div className="max-w-fit lg:max-w-screen-lg m-0 sm:m-10 shadow-md flex justify-center flex-1 bg-white">
-				<div className="lg:w-1/2 p-6 sm:p-12">
+		<div className="flex justify-center px-4 my-auto text-gray-800 md:px-8">
+			<div className="flex justify-center flex-1 m-0 bg-white shadow-md max-w-fit lg:max-w-screen-lg sm:m-10">
+				<div className="p-6 lg:w-1/2 sm:p-12">
 					<div className="flex flex-col items-center">
-						<h1 className="text-2xl xl:text-3xl font-extrabold">Welcome Back!</h1>
-						<div className="w-full flex-1 mt-8">
+						<h1 className="text-2xl font-extrabold xl:text-3xl">Welcome Back!</h1>
+						<div className="flex-1 w-full mt-8">
 							<button
 								onClick={handleGoogleSignIn}
-								className="w-full max-w-xs font-bold mx-auto shadow-sm border border-gray-200 py-3 flex gap-4 items-center justify-center hover:shadow-md transition-all duration-300">
+								className="flex items-center justify-center w-full max-w-xs gap-4 py-3 mx-auto font-bold transition-all duration-300 border border-gray-200 shadow-sm hover:shadow-md">
 								<svg className="w-4" viewBox="0 0 533.5 544.3">
 									<path
 										d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
@@ -121,27 +121,27 @@ const LogIn = () => {
 								<span>Log In with Google</span>
 							</button>
 
-							<div className="leading-none flex justify-center text-sm text-gray-600 tracking-wide font-medium my-8">
+							<div className="flex justify-center my-8 text-sm font-medium leading-none tracking-wide text-gray-600">
 								Or Log In with E-mail
 							</div>
 
-							<form onSubmit={handleLogIn} className="mx-auto max-w-xs">
+							<form onSubmit={handleLogIn} className="max-w-xs mx-auto">
 								<input
-									className="w-full px-8 py-4 font-medium border border-gray-200 placeholder-gray-500 text-sm"
+									className="w-full px-8 py-4 text-sm font-medium placeholder-gray-500 border border-gray-200"
 									type="email"
 									name="email"
 									placeholder="Email"
 								/>
 								<input
-									className="w-full px-8 py-4 font-medium border border-gray-200 placeholder-gray-500 text-sm mt-5"
+									className="w-full px-8 py-4 mt-5 text-sm font-medium placeholder-gray-500 border border-gray-200"
 									type="password"
 									name="password"
 									placeholder="Password"
 								/>
-								<button className="tracking-wide font-semibold bg-gray-700 text-gray-100 w-full py-4 hover:bg-gray-800 transition-all duration-300 mt-5">
+								<button className="w-full py-4 mt-5 font-semibold tracking-wide text-gray-100 transition-all duration-300 bg-gray-700 hover:bg-gray-800">
 									Log In
 								</button>
-								<span className="text-gray-600 mt-2 inline-block">
+								<span className="inline-block mt-2 text-gray-600">
 									New here?{' '}
 									<Link to={'/register'} className="text-gray-900">
 										Register here.

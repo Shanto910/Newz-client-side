@@ -64,28 +64,28 @@ const AllUsers = () => {
 	};
 
 	return (
-		<div className="mt-8 lg:mt-12 w-full px-4 lg:px-8">
-			<div className="text-center mb-8">
-				<h2 className="md:text-4xl text-2xl font-bold text-gray-700 mb-4">All Users</h2>
+		<div className="w-full px-4 mt-8 lg:mt-12 lg:px-8">
+			<div className="mb-8 text-center">
+				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">All Users</h2>
 				<p className="text-xl max-w-[48ch] mx-auto text-gray-500">
 					Manage and view all registered users, and promote them to admin status if needed
 				</p>
 			</div>
 
-			<div className="shadow-md max-w-2xl mx-auto mt-12 overflow-x-auto">
+			<div className="max-w-2xl mx-auto mt-12 overflow-x-auto shadow-md">
 				<table className="w-full text-sm text-gray-500">
-					<thead className="text-xs text-gray-700 uppercase bg-gray-200 tracking-wider">
+					<thead className="text-xs tracking-wider text-gray-700 uppercase bg-gray-200">
 						<tr>
-							<th scope="col" className="py-3 px-6 text-left">
+							<th scope="col" className="px-6 py-3 text-left">
 								Profile Picture
 							</th>
-							<th scope="col" className="py-3 px-6 text-left">
+							<th scope="col" className="px-6 py-3 text-left">
 								Name
 							</th>
-							<th scope="col" className="py-3 px-6 text-left">
+							<th scope="col" className="px-6 py-3 text-left">
 								Email
 							</th>
-							<th scope="col" className="py-3 px-6 text-center">
+							<th scope="col" className="px-6 py-3 text-center">
 								Role
 							</th>
 						</tr>
@@ -94,19 +94,20 @@ const AllUsers = () => {
 						{users.map(user => (
 							<tr
 								key={user._id}
-								className="bg-white border-b hover:bg-gray-50 text-lg font-medium">
-								<td className="px-6 py-4 flex justify-center">
+								className="text-lg font-medium bg-white border-b hover:bg-gray-50">
+								<td className="flex justify-center px-6 py-4">
 									<img
-										className="w-10 h-10 rounded-full object-cover"
+										className="object-cover w-10 h-10 rounded-full"
 										src={user.photo}
 										alt=""
+										referrerPolicy="no-referrer"
 									/>
 								</td>
 								<td className="px-6 py-4">{user.name}</td>
 								<td className="px-6 py-4">{user.email}</td>
 								<td
 									onClick={() => handleMakeAdmin(user)}
-									className="px-6 py-4 flex justify-center cursor-pointer">
+									className="flex justify-center px-6 py-4 cursor-pointer">
 									{user.role === 'admin' ? (
 										<RiAdminFill className="text-2xl text-red-400" />
 									) : (
@@ -118,7 +119,7 @@ const AllUsers = () => {
 					</tbody>
 				</table>
 			</div>
-			<div className="flex justify-center items-center gap-4 mt-6">
+			<div className="flex items-center justify-center gap-4 mt-6">
 				<button
 					onClick={() => handlePageChange(currentPage - 1)}
 					disabled={currentPage === 1}
