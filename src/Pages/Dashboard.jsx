@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 const Dashboard = () => {
 	const axiosSecure = useAxiosSecure();
-
 	const { data: publication = [] } = useQuery({
 		queryKey: ['publication'],
 		queryFn: async () => {
@@ -14,38 +13,30 @@ const Dashboard = () => {
 		},
 	});
 
-	const { data: typeData = [] } = useQuery({
-		queryKey: ['typeData'],
-		queryFn: async () => {
-			const res = await axiosSecure.get('/articles/type');
-			return res.data || [];
-		},
-	});
-
-	const { data: articleStatus = [] } = useQuery({
-		queryKey: ['articleStatus'],
-		queryFn: async () => {
-			const res = await axiosSecure.get('/articles/status');
-			return res.data || [];
-		},
-	});
-
-	const pieChartData = [
+	const pieChart = [
 		['Publisher', 'Number of Articles'],
 		...publication.map(item => [item.publisher, item.count]),
 	];
 
-	const typeChartData = [
-		['Article Type', 'Number of Articles'],
-		...typeData.map(item => [item.articleType, item.count]),
+	const ArticlesPerMonth = [
+		['Month', 'Articles Published'],
+		['Jan', 15],
+		['Feb', 12],
+		['Mar', 20],
+		['Apr', 18],
+		['May', 25],
 	];
 
-	const articleStatusChartData = [
-		['Status', 'Number of Articles'],
-		...articleStatus.map(item => [item.status, item.count]),
+	const ViewsPerDay = [
+		['Day', 'Views'],
+		['1', 150],
+		['2', 200],
+		['3', 120],
+		['4', 90],
+		['5', 280],
 	];
 
-	const ChartCard = ({ title, chartType, data }) => (
+	const ChartCard = ({ title, chartType, data, options }) => (
 		<div className="p-6 transition-shadow duration-300 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md">
 			<h2 className="mb-4 text-xl font-semibold text-gray-800">{title}</h2>
 			<Chart
@@ -56,6 +47,7 @@ const Dashboard = () => {
 				options={{
 					legend: { position: 'bottom' },
 					colors: ['#364153', '#4a5565', '#6a7282', '#99a1af', '#d1d5dc'],
+					...options,
 				}}
 			/>
 		</div>
@@ -65,6 +57,7 @@ const Dashboard = () => {
 		title: PropTypes.string.isRequired,
 		chartType: PropTypes.string.isRequired,
 		data: PropTypes.arrayOf(PropTypes.array).isRequired,
+		options: PropTypes.object,
 	};
 
 	return (
@@ -77,12 +70,24 @@ const Dashboard = () => {
 			</div>
 
 			<div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-				<ChartCard title="Articles by Publisher" chartType="PieChart" data={pieChartData} />
-				<ChartCard title="Articles by Type" chartType="ColumnChart" data={typeChartData} />
+				<ChartCard title="Articles by Publisher" chartType="PieChart" data={pieChart} />
 				<ChartCard
-					title="Article Status"
+					title="Articles Published Per Month"
+					chartType="ColumnChart"
+					data={ArticlesPerMonth}
+					options={{
+						hAxis: { title: 'Month' },
+						vAxis: { title: 'Articles Published' },
+					}}
+				/>
+				<ChartCard
+					title="Article Views Over Time"
 					chartType="SteppedAreaChart"
-					data={articleStatusChartData}
+					data={ViewsPerDay}
+					options={{
+						hAxis: { title: 'Day' },
+						vAxis: { title: 'Views' },
+					}}
 				/>
 			</div>
 		</div>
