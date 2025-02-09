@@ -102,20 +102,20 @@ const AllArticles = () => {
 						<p className="mb-4 text-gray-500 text-ellipsis-custom">
 							{article.description}
 						</p>
-						<p className="text-sm text-gray-400">Publisher: {article.publisher}</p>
+						<p className="mb-2 text-sm text-gray-400">Publisher: {article.publisher}</p>
 						{article.tags && (
-							<div className="flex flex-wrap gap-2 mt-2">
+							<div className="flex flex-wrap gap-3">
 								{article.tags.map((tag, index) => (
 									<span
 										key={index}
-										className="px-2 py-1 mb-5 text-sm text-gray-600 bg-gray-100">
+										className="px-4 py-2 mb-5 text-sm font-medium text-gray-800 transition duration-300 ease-in-out transform bg-gray-100 rounded-full shadow-md hover:scale-105 hover:bg-gray-200">
 										{tag}
 									</span>
 								))}
 							</div>
 						)}
 						<Link
-							to={`articles/${article._id}`}
+							to={`/article-details/${article._id}`}
 							className={`py-3 mt-auto text-white text-center ${
 								article.articleType === 'premium' && !userInfo?.premiumTaken
 									? 'bg-gray-400 pointer-events-none'

@@ -116,6 +116,7 @@ const AddArticles = () => {
 					author_name: user?.displayName,
 					author_email: user?.email,
 					author_photo: user?.photoURL,
+					views: 0,
 				};
 
 				const articleRes = await axiosSecure.post('/articles/pending', articleInfo);

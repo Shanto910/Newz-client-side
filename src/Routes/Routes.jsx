@@ -16,6 +16,7 @@ import MyProfile from '../Pages/MyProfile';
 import MyArticles from '../Pages/MyArticles';
 import Dashboard from '../Pages/Dashboard';
 import UpdateArticle from '../Pages/UpdateArticle';
+import ArticleDetails from '../Pages/ArticleDetails';
 
 export const router = createBrowserRouter([
 	{
@@ -67,6 +68,14 @@ export const router = createBrowserRouter([
 				element: (
 					<PrivateRoute>
 						<UpdateArticle />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: `/article-details/:id`,
+				element: (
+					<PrivateRoute>
+						<ArticleDetails />
 					</PrivateRoute>
 				),
 			},

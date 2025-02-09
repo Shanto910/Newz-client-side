@@ -51,10 +51,9 @@ const UpdateArticle = () => {
 	const { data: article = {} } = useQuery({
 		queryKey: ['singleArticle', id],
 		queryFn: async () => {
-			const res = await axiosSecure.get(`/articles/${id}`);
+			const res = await axiosSecure.get(`/article/${id}`);
 			return res.data;
 		},
-		enabled: !!id,
 	});
 
 	const { data: publishers = [] } = useQuery({
