@@ -144,7 +144,7 @@ const AddArticles = () => {
 	};
 
 	return (
-		<div className="max-w-screen-xl mx-auto mt-8 mb-12 md:mt-12 md:mb-24">
+		<div className="max-w-screen-xl px-4 mx-auto mt-8 mb-12 md:mt-12 md:mb-24 lg:px-8">
 			<div className="mb-8 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">Add Article</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">

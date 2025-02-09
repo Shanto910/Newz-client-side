@@ -15,6 +15,7 @@ import AllArticles from '../Pages/AllArticles';
 import MyProfile from '../Pages/MyProfile';
 import MyArticles from '../Pages/MyArticles';
 import Dashboard from '../Pages/Dashboard';
+import UpdateArticle from '../Pages/UpdateArticle';
 
 export const router = createBrowserRouter([
 	{
@@ -58,6 +59,14 @@ export const router = createBrowserRouter([
 				element: (
 					<PrivateRoute>
 						<AddArticles />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: `/update-articles/:id`,
+				element: (
+					<PrivateRoute>
+						<UpdateArticle />
 					</PrivateRoute>
 				),
 			},

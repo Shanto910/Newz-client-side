@@ -50,7 +50,7 @@ const AllUsers = () => {
 				refetch();
 				Swal.fire({
 					icon: 'success',
-					title: `${user.name} Login Successful!`,
+					title: `${user.name} is now an Admin!`,
 					showConfirmButton: false,
 					showClass: {
 						popup: 'animate__animated animate__fadeInDown',
@@ -64,17 +64,16 @@ const AllUsers = () => {
 	};
 
 	return (
-		<div className="w-full px-4 mt-8 lg:mt-12 lg:px-8">
+		<div className="w-full px-4 my-8 lg:my-12 lg:px-8">
 			<div className="mb-8 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">All Users</h2>
 				<p className="text-xl max-w-[48ch] mx-auto text-gray-500">
 					Manage and view all registered users, and promote them to admin status if needed
 				</p>
 			</div>
-
-			<div className="max-w-2xl mx-auto mt-12 overflow-x-auto shadow-md">
-				<table className="w-full text-sm text-gray-500">
-					<thead className="text-xs tracking-wider text-gray-700 uppercase bg-gray-200">
+			<div className="mx-auto overflow-x-auto shadow-md max-w-[340px] sm:max-w-screen-xl">
+				<table className="min-w-full">
+					<thead className="text-gray-700 uppercase bg-gray-100">
 						<tr>
 							<th scope="col" className="px-6 py-3 text-left">
 								Profile Picture
@@ -94,7 +93,7 @@ const AllUsers = () => {
 						{users.map(user => (
 							<tr
 								key={user._id}
-								className="text-lg font-medium bg-white border-b hover:bg-gray-50">
+								className="text-lg font-medium text-gray-700 bg-white border-b hover:bg-gray-50">
 								<td className="flex justify-center px-6 py-4">
 									<img
 										className="object-cover w-10 h-10 rounded-full"

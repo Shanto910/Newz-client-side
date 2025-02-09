@@ -119,7 +119,6 @@ const ManageArticles = () => {
 			confirmButtonText: 'Yes, delete it!',
 			cancelButtonText: 'Cancel',
 			confirmButtonColor: '#d33',
-			cancelButtonColor: '#3085d6',
 		});
 
 		if (result.isConfirmed) {
@@ -145,7 +144,7 @@ const ManageArticles = () => {
 	};
 
 	return (
-		<div className="px-4 mx-auto mt-8 mb-12 max-w-7xl md:mt-12 md:mb-24 text-nowrap lg:px-8">
+		<div className="w-full px-4 my-8 lg:my-12 lg:px-8">
 			<div className="mb-8 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">All Articles</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
@@ -153,7 +152,7 @@ const ManageArticles = () => {
 				</p>
 			</div>
 
-			<div className="w-full p-6 overflow-x-auto bg-white shadow ">
+			<div className="mx-auto overflow-x-auto bg-white shadow sm:max-w-7xl max-w-[340px] text-nowrap">
 				<table className="w-full text-left border-collapse table-auto">
 					<thead>
 						<tr>
