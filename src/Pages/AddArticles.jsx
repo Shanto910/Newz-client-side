@@ -177,7 +177,7 @@ const AddArticles = () => {
 								</label>
 								<Select
 									isMulti
-									name="colors"
+									name="tags"
 									options={options}
 									className="basic-multi-select"
 									classNamePrefix="select"

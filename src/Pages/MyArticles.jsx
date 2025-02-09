@@ -54,10 +54,6 @@ const MyArticles = () => {
 		});
 	};
 
-	const handleUpdate = id => {
-		console.log('Update article:', id);
-	};
-
 	return (
 		<div className="w-full px-4 my-8 lg:my-12 lg:px-8">
 			<div className="mb-8 text-center">
@@ -118,11 +114,11 @@ const MyArticles = () => {
 								</td>
 								<td className="px-6 py-4">
 									<div className="flex items-center gap-4">
-										<button
-											onClick={() => handleUpdate(article._id)}
+										<Link
+											to={`/update-article/${article._id}`}
 											className="px-3 py-1 text-gray-800 transition duration-300 bg-white border border-gray-800 hover:bg-gray-800 hover:text-white">
 											Update
-										</button>
+										</Link>
 										<button
 											onClick={() => confirmAndDelete(article._id)}
 											className="px-3 py-1 text-red-600 hover:text-red-700">
