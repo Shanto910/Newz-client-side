@@ -117,11 +117,11 @@ const AllArticles = () => {
 						<Link
 							to={`/article-details/${article._id}`}
 							className={`py-3 mt-auto text-white text-center ${
-								article.articleType === 'premium' && !userInfo?.premiumTaken
+								article.articleType === 'premium' &&
+								(!userInfo?.premiumTaken || Date.now() > userInfo.premiumTaken)
 									? 'bg-gray-400 pointer-events-none'
 									: 'bg-gray-700 hover:bg-gray-800'
-							}`}
-							disabled={article.articleType === 'premium' && !userInfo?.premiumTaken}>
+							}`}>
 							Read more
 						</Link>
 					</div>

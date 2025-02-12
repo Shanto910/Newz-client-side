@@ -25,10 +25,13 @@ const SubscriptionPlans = () => {
 						</li>
 						<li className="leading-loose text-gray-800 list-disc ml-7">No storage</li>
 						<li className="leading-loose text-gray-800 list-disc ml-7">No support</li>
+						<li className="leading-loose text-gray-800 list-disc ml-7">
+							No protection
+						</li>
 					</ul>
-					<Link className="inline-block w-full py-4 mt-5 font-semibold text-center text-gray-100 bg-gray-600 hover:bg-gray-800">
+					<button className="inline-block w-full py-4 mt-5 font-semibold text-center text-gray-100 bg-gray-600 hover:bg-gray-800">
 						Free by default
-					</Link>
+					</button>
 				</div>
 
 				<div className="z-20 flex-1 w-full px-8 py-4 shadow-md md:relative md:max-w-96 bg-gray-50 hover:shadow-lg md:-my-8 md:-mx-4">
@@ -52,8 +55,13 @@ const SubscriptionPlans = () => {
 						<li className="leading-loose text-gray-800 list-disc ml-7">
 							Can download articles
 						</li>
+						<li className="leading-loose text-gray-800 list-disc ml-7">
+							Top level protection
+						</li>
 					</ul>
-					<Link className="inline-block w-full py-4 mt-5 font-semibold text-center text-gray-100 bg-gray-800 hover:bg-gray-900">
+					<Link
+						to={'/subscription'}
+						className="inline-block w-full py-4 mt-5 font-semibold text-center text-gray-100 bg-gray-800 hover:bg-gray-900">
 						Get premium
 					</Link>
 				</div>
@@ -70,9 +78,9 @@ const SubscriptionPlans = () => {
 							Can share with up to 4 people
 						</li>
 					</ul>
-					<Link className="inline-block w-full py-4 mt-5 font-semibold text-center text-gray-100 bg-gray-600 hover:bg-gray-800">
-						Get family pack
-					</Link>
+					<button className="inline-block w-full py-4 mt-5 font-semibold text-center text-gray-100 bg-gray-600 hover:bg-gray-800">
+						Coming Soon
+					</button>
 				</div>
 			</div>
 		</div>

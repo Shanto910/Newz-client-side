@@ -17,6 +17,10 @@ import MyArticles from '../Pages/MyArticles';
 import Dashboard from '../Pages/Dashboard';
 import UpdateArticle from '../Pages/UpdateArticle';
 import ArticleDetails from '../Pages/ArticleDetails';
+import SubscriptionPage from '../Pages/SubscriptionPage';
+import Payment from '../Pages/Payment';
+import PremiumArticles from '../Pages/PremiumArticles';
+import PremiumRoute from './PremiumRoute';
 
 export const router = createBrowserRouter([
 	{
@@ -77,6 +81,30 @@ export const router = createBrowserRouter([
 					<PrivateRoute>
 						<ArticleDetails />
 					</PrivateRoute>
+				),
+			},
+			{
+				path: '/subscription',
+				element: (
+					<PrivateRoute>
+						<SubscriptionPage />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: '/payment',
+				element: (
+					<PrivateRoute>
+						<Payment />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: '/premium-articles',
+				element: (
+					<PremiumRoute>
+						<PremiumArticles />
+					</PremiumRoute>
 				),
 			},
 		],

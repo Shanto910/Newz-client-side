@@ -83,18 +83,21 @@ const AddArticles = () => {
 
 		try {
 			const res = await axiosPublic.post(image_hosting_api, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
+				headers: { 'Content-Type': 'multipart/form-data' },
 			});
 
 			if (res.data.success) {
-				const userInfo = await axiosSecure.get(`/users/${user?.email}`);
-				const isPremiumUser = userInfo.data?.premiumTaken;
+				const { data: userInfo } = await axiosSecure.get(`/users/${user?.email}`);
+
+				const isPremiumUser =
+					userInfo?.premiumTaken &&
+					Date.now() < new Date(userInfo.premiumTaken).getTime();
 
 				if (!isPremiumUser) {
-					const existingArticles = await axiosSecure.get(`/articles/user/${user?.email}`);
-					if (existingArticles.data.length > 0) {
+					const { data: existingArticles } = await axiosSecure.get(
+						`/articles/user/${user?.email}`
+					);
+					if (existingArticles.length > 0) {
 						Swal.fire({
 							icon: 'error',
 							title: 'Submission failed',

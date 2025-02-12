@@ -2,10 +2,12 @@ import { Link, NavLink } from 'react-router-dom';
 import { GiNewspaper } from 'react-icons/gi';
 import useAuth from '../../Hooks/useAuth';
 import useAdmin from '../../Hooks/useAdmin';
+import usePremium from '../../Hooks/usePremium';
 
 const TopNavbar = () => {
 	const { user, logOut } = useAuth();
 	const [isAdmin] = useAdmin();
+	const [isPremium] = usePremium();
 
 	return (
 		<nav className="fixed top-0 left-0 right-0 z-10 flex items-center h-16 gap-4 px-4 bg-white shadow-sm md:px-8 backdrop-blur-md bg-opacity-20 topbar">
@@ -39,7 +41,22 @@ const TopNavbar = () => {
 						className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
 						My article
 					</NavLink>
+					<NavLink
+						to={'/subscription'}
+						className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
+						Subscription
+					</NavLink>
 				</>
+			) : (
+				''
+			)}
+
+			{user?.email && isPremium ? (
+				<NavLink
+					to={'/premium-articles'}
+					className="items-center hidden h-full font-semibold text-gray-600 transition duration-300 hover:text-gray-800 md:flex">
+					Premium Articles
+				</NavLink>
 			) : (
 				''
 			)}

@@ -82,7 +82,7 @@ const Register = () => {
 				name: name,
 				email: email,
 				photo: photo,
-				premiumTaken: false,
+				premiumTaken: null,
 			};
 
 			const dbResponse = await axiosPublic.post('/users', userInfo);

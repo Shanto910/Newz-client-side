@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
+import { useEffect, useState } from 'react';
 
 const axiosSecure = axios.create({
 	baseURL: import.meta.env.VITE_BASEURL,
@@ -8,7 +9,7 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
 	const navigate = useNavigate();
 	const { logOut } = useAuth();
-
+	const [errorStatus, setErrorStatus] = useState(null);
 	axiosSecure.interceptors.request.use(
 		function (config) {
 			const token = localStorage.getItem('access-token');
@@ -25,14 +26,20 @@ const useAxiosSecure = () => {
 			return response;
 		},
 		async error => {
-			const status = error.response.status;
+			const status = error.response?.status;
 			if (status === 401 || status === 403) {
 				await logOut();
-				navigate('/login');
+				setErrorStatus(status);
 			}
 			return Promise.reject(error);
 		}
 	);
+
+	useEffect(() => {
+		if (errorStatus === 401 || errorStatus === 403) {
+			navigate('/login');
+		}
+	}, [errorStatus, navigate]);
 
 	return axiosSecure;
 };
