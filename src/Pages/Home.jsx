@@ -2,24 +2,29 @@ import { useNavigate } from 'react-router-dom';
 import AllPublishers from '../Components/AllPublishers/AllPublishers';
 import HomeUserStatistics from '../Components/HomeUserStatistics/HomeUserStatistics';
 import SubscriptionPlans from '../Components/SubscriptionPlans/SubscriptionPlans';
-import TrandingArticles from '../Components/TrandingArticles/TrandingArticles';
+import TrendingArticles from '../Components/TrendingArticles';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import FAQ from '../Components/FAQ';
+import usePremium from '../Hooks/usePremium';
 
 const Home = () => {
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
+	const [isPremium] = usePremium();
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			setShowModal(true);
-		}, 10000);
+		if (!isPremium) {
+			const timer = setTimeout(() => {
+				setShowModal(true);
+			}, 10000);
 
-		return () => clearTimeout(timer);
-	}, []);
+			return () => clearTimeout(timer);
+		}
+	}, [isPremium]);
 
 	useEffect(() => {
-		if (showModal) {
+		if (!isPremium && showModal) {
 			Swal.fire({
 				title: 'Subscribe to Premium!',
 				text: 'Get exclusive features and content. Click below to explore subscription plans.',
@@ -41,13 +46,14 @@ const Home = () => {
 				}
 			});
 		}
-	}, [showModal, navigate]);
+	}, [showModal, navigate, isPremium]);
 
 	return (
 		<>
-			<TrandingArticles />
+			<TrendingArticles />
 			<AllPublishers />
 			<HomeUserStatistics />
+			<FAQ />
 			<SubscriptionPlans />
 		</>
 	);

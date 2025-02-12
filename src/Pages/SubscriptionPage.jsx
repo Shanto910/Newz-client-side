@@ -50,9 +50,9 @@ const SubscriptionPage = () => {
 						value={subscriptionPeriod}
 						onChange={e => setSubscriptionPeriod(e.target.value)}
 						className="w-full p-3 border border-gray-300">
-						<option value="1 minute">1 minute</option>
-						<option value="5 days">5 days</option>
-						<option value="10 days">10 days</option>
+						<option value="1 minute">$1 --- 1 minute</option>
+						<option value="5 days">$5 --- 5 days</option>
+						<option value="10 days">$10 --- 10 days</option>
 					</select>
 				</div>
 				<ul>

@@ -5,14 +5,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
-const TrandingArticles = () => {
+const TrendingArticles = () => {
 	const axiosPublic = useAxiosPublic();
 	const { data: trendingArticles = [] } = useQuery({
 		queryKey: ['trendingArticles'],
 		queryFn: async () => {
-			const { data } = await axiosPublic.get('/tranding-articles');
+			const { data } = await axiosPublic.get('/trending-articles');
 			return data;
 		},
 	});
@@ -53,10 +53,10 @@ const TrandingArticles = () => {
 				))}
 				<div className="text-lg font-semibold md:text-xl">
 					<p className="absolute z-10 p-2 text-white -skew-x-6 bg-white border-b-4 border-l-4 border-gray-700 top-4 left-4">
-						Tranding Articles
+						Trending Articles
 					</p>
 					<p className="absolute z-10 p-2 text-gray-700 top-4 left-5">
-						Tranding Articles
+						Trending Articles
 					</p>
 				</div>
 			</Swiper>
@@ -64,4 +64,4 @@ const TrandingArticles = () => {
 	);
 };
 
-export default TrandingArticles;
+export default TrendingArticles;
