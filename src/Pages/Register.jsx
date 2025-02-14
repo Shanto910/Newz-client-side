@@ -5,6 +5,9 @@ import useAuth from '../Hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const Register = () => {
 	const { createUser, updateUserProfile, setUser } = useAuth();
 	const axiosPublic = useAxiosPublic();
@@ -68,36 +71,59 @@ const Register = () => {
 		const email = form.email.value;
 		const password = form.password.value;
 		const name = form.name.value;
-		const photo = form.photo.value;
+		const imageFile = form.photo.files[0];
+
+		if (!imageFile) {
+			Swal.fire({
+				icon: 'error',
+				title: 'No file selected',
+				text: 'Please select an image file to upload.',
+			});
+			return;
+		}
+
+		const formData = new FormData();
+		formData.append('image', imageFile);
 
 		if (!validatePassword(password)) return;
 
 		try {
-			const result = await createUser(email, password);
-			await updateUserProfile(name, photo);
+			const res = await axiosPublic.post(image_hosting_api, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
 
-			setUser({ ...result.user, photoURL: photo, displayName: name });
+			if (res.data.success) {
+				const photo = res.data.data.display_url;
+				const result = await createUser(email, password);
+				await updateUserProfile(name, photo);
 
-			const userInfo = {
-				name: name,
-				email: email,
-				photo: photo,
-				premiumTaken: null,
-			};
+				setUser({ ...result.user, photoURL: photo, displayName: name });
 
-			const dbResponse = await axiosPublic.post('/users', userInfo);
+				const userInfo = {
+					name: name,
+					email: email,
+					photo: photo,
+					premiumTaken: null,
+				};
 
-			if (dbResponse.data.insertedId) {
-				Swal.fire({
-					title: 'Yay! Register was successful!',
-					showClass: {
-						popup: 'animate__animated animate__fadeInDown',
-					},
-					hideClass: {
-						popup: 'animate__animated animate__fadeOutUp',
-					},
-				});
-				navigate('/');
+				const dbResponse = await axiosPublic.post('/users', userInfo);
+
+				if (dbResponse.data.insertedId) {
+					Swal.fire({
+						title: 'Yay! Register was successful!',
+						showClass: {
+							popup: 'animate__animated animate__fadeInDown',
+						},
+						hideClass: {
+							popup: 'animate__animated animate__fadeOutUp',
+						},
+					});
+					navigate('/');
+				}
+			} else {
+				throw new Error('Image upload failed');
 			}
 		} catch (err) {
 			showAlert('User Register Failed!', err?.message);
@@ -134,10 +160,9 @@ const Register = () => {
 									placeholder="Password"
 								/>
 								<input
-									className="w-full px-8 py-4 mt-5 text-sm font-medium placeholder-gray-500 border border-gray-200"
-									type="text"
 									name="photo"
-									placeholder="Photo URL"
+									className="w-full px-8 py-4 mt-5 text-sm font-medium text-gray-500 placeholder-gray-500 border border-gray-200 cursor-pointer"
+									type="file"
 								/>
 								<button className="w-full py-4 mt-5 font-semibold tracking-wide text-gray-100 transition-all duration-300 bg-gray-700 hover:bg-gray-800">
 									Register

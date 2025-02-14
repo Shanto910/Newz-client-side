@@ -98,7 +98,6 @@ const AllUsers = () => {
 									<img
 										className="object-cover w-10 h-10 rounded-full"
 										src={user.photo}
-										alt=""
 										referrerPolicy="no-referrer"
 									/>
 								</td>

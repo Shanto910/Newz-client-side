@@ -32,6 +32,7 @@ const ArticleDetails = () => {
 				<img
 					src={article?.author_photo}
 					alt={article?.author_name}
+					referrerPolicy="no-referrer"
 					className="object-cover w-12 h-12 rounded-full"
 				/>
 				<div className="flex flex-col">
