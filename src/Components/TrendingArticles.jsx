@@ -58,6 +58,7 @@ const TrendingArticles = () => {
 									{article.description}
 								</p>
 								<Link
+									to={`/article-details/${article._id}`}
 									className={`py-2 mt-6 text-white text-lg text-center inline-block px-4 ${
 										article.articleType === 'premium' &&
 										(!userInfo?.premiumTaken ||

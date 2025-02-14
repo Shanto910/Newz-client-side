@@ -11,6 +11,10 @@ body {
 	height: 100%;
 }
 
+.menubar .active {
+	background-color: rgb(209 213 219) !important;
+}
+
 .topbar .active {
 	color: rgb(31 41 55);
 	border-block-end: 2px solid rgb(31 41 55);

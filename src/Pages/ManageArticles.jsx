@@ -152,7 +152,7 @@ const ManageArticles = () => {
 				</p>
 			</div>
 
-			<div className="mx-auto overflow-x-auto bg-white shadow sm:max-w-7xl max-w-[340px] text-nowrap">
+			<div className="max-w-xs mx-auto overflow-x-auto bg-white shadow md:max-w-2xl lg:max-w-3xl xl:max-w-[1220px] text-nowrap">
 				<table className="w-full text-left border-collapse table-auto">
 					<thead>
 						<tr>
@@ -163,7 +163,7 @@ const ManageArticles = () => {
 							<th className="px-4 py-2">Posted Date</th>
 							<th className="px-4 py-2">Status</th>
 							<th className="px-4 py-2">Publisher</th>
-							<th className="px-4 py-2">Actions</th>
+							<th className="px-4 py-2 text-center">Actions</th>
 						</tr>
 					</thead>
 					<tbody>

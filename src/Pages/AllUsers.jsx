@@ -71,11 +71,11 @@ const AllUsers = () => {
 					Manage and view all registered users, and promote them to admin status if needed
 				</p>
 			</div>
-			<div className="mx-auto overflow-x-auto shadow-md max-w-[340px] sm:max-w-screen-xl">
+			<div className="mx-auto overflow-x-auto shadow-md max-w-[340px] sm:max-w-screen-md">
 				<table className="min-w-full">
 					<thead className="text-gray-700 uppercase bg-gray-100">
 						<tr>
-							<th scope="col" className="px-6 py-3 text-left">
+							<th scope="col" className="px-6 py-3 text-center">
 								Profile Picture
 							</th>
 							<th scope="col" className="px-6 py-3 text-left">

@@ -3,6 +3,7 @@ import useAuth from '../Hooks/useAuth';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { BsPencil } from 'react-icons/bs';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -10,6 +11,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const MyProfile = () => {
 	const { user, updateUserProfile, setUser, setLoading } = useAuth();
 	const axiosSecure = useAxiosSecure();
+	const axiosPublic = useAxiosPublic();
 
 	const [name, setName] = useState(user?.displayName || '');
 	const [photo, setPhoto] = useState(null);
@@ -31,13 +33,9 @@ const MyProfile = () => {
 				const formData = new FormData();
 				formData.append('image', photo);
 
-				const res = await fetch(image_hosting_api, {
-					method: 'POST',
-					body: formData,
-				});
-				const data = await res.json();
-				if (data.success) {
-					photoURL = data.data.url;
+				const res = await axiosPublic.post(image_hosting_api, formData);
+				if (res.data.success) {
+					photoURL = res.data.data.display_url;
 				} else {
 					throw new Error('Image upload failed');
 				}
