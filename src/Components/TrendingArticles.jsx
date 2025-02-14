@@ -6,14 +6,29 @@ import 'swiper/css/navigation';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
+import useAuth from '../Hooks/useAuth';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const TrendingArticles = () => {
+	const { user } = useAuth();
 	const axiosPublic = useAxiosPublic();
+	const axiosSecure = useAxiosSecure();
 	const { data: trendingArticles = [] } = useQuery({
 		queryKey: ['trendingArticles'],
 		queryFn: async () => {
 			const { data } = await axiosPublic.get('/trending-articles');
 			return data;
+		},
+	});
+
+	const { data: userInfo } = useQuery({
+		queryKey: ['userInfo', user?.email],
+		queryFn: async () => {
+			if (user?.email) {
+				const { data } = await axiosSecure.get(`/users/${user.email}`);
+				return data;
+			}
+			return null;
 		},
 	});
 
@@ -27,24 +42,29 @@ const TrendingArticles = () => {
 				speed={700}
 				loop={true}
 				className="relative max-w-screen-xl mx-auto">
-				{trendingArticles.map((banner, i) => (
+				{trendingArticles.map((article, i) => (
 					<SwiperSlide key={i}>
 						<div className="relative h-80 md:h-96">
 							<img
-								src={banner.image}
-								alt={banner.title}
+								src={article.image}
+								alt={article.title}
 								className="object-cover w-full h-full opacity-50"
 							/>
 							<div className="absolute w-11/12 text-center transform -translate-x-1/2 top-1/4 md:top-1/3 left-1/2 lg:w-2/3 md:w-4/5">
 								<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">
-									{banner.title}
+									{article.title}
 								</h2>
 								<p className="text-lg md:text-xl max-w-[66ch] text-gray-800 mx-auto text-ellipsis-custom">
-									{banner.description}
+									{article.description}
 								</p>
 								<Link
-									to={`/article-details/${banner._id}`}
-									className="inline-block px-4 py-2 mt-6 text-lg text-white bg-gray-700 md:text-xl hover:bg-gray-800">
+									className={`py-2 mt-6 text-white text-lg text-center inline-block px-4 ${
+										article.articleType === 'premium' &&
+										(!userInfo?.premiumTaken ||
+											Date.now() > userInfo.premiumTaken)
+											? 'bg-gray-400 pointer-events-none'
+											: 'bg-gray-700 hover:bg-gray-800'
+									}`}>
 									More about this article
 								</Link>
 							</div>

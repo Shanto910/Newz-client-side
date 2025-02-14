@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import FAQ from '../Components/FAQ';
 import usePremium from '../Hooks/usePremium';
+import Feature from '../Components/Feature';
 
 const Home = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -53,8 +54,9 @@ const Home = () => {
 			<TrendingArticles />
 			<AllPublishers />
 			<HomeUserStatistics />
-			<FAQ />
+			<Feature />
 			<SubscriptionPlans />
+			<FAQ />
 		</>
 	);
 };
