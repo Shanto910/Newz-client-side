@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import usePremium from '../Hooks/usePremium';
 import PropTypes from 'prop-types';
-import Spinner from '../Components/Spinner/Spinner';
+import Spinner from '../Components/Spinner';
 
 const PremiumRoute = ({ children }) => {
 	const { user, loading } = useAuth();

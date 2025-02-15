@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import SideNavbar from '../Components/SideNavbar/SideNavbar';
-import Spinner from '../Components/Spinner/Spinner';
 import useAuth from '../Hooks/useAuth';
+import Spinner from '../Components/Spinner';
+import SideNavbar from '../Components/SideNavbar';
 
 const DashLayout = () => {
 	const { loading } = useAuth();

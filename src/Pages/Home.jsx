@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import AllPublishers from '../Components/AllPublishers/AllPublishers';
-import HomeUserStatistics from '../Components/HomeUserStatistics/HomeUserStatistics';
-import SubscriptionPlans from '../Components/SubscriptionPlans/SubscriptionPlans';
-import TrendingArticles from '../Components/TrendingArticles';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import FAQ from '../Components/FAQ';
 import usePremium from '../Hooks/usePremium';
 import Feature from '../Components/Feature';
+import TrendingArticles from '../Components/TrendingArticles';
+import AllPublishers from '../Components/AllPublishers';
+import HomeUserStatistics from '../Components/HomeUserStatistics';
+import SubscriptionPlans from '../Components/SubscriptionPlans';
 
 const Home = () => {
 	const [showModal, setShowModal] = useState(false);

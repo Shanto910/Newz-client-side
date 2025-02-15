@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ImNewspaper } from 'react-icons/im';
 import { MdOutlineClose, MdMenu } from 'react-icons/md';
-import useAuth from '../../Hooks/useAuth';
-import useAdmin from '../../Hooks/useAdmin';
-import usePremium from '../../Hooks/usePremium';
+import useAuth from '../Hooks/useAuth';
+import useAdmin from '../Hooks/useAdmin';
+import usePremium from '../Hooks/usePremium';
 
 const TopNavbar = () => {
 	const { user, logOut } = useAuth();
