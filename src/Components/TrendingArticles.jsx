@@ -6,29 +6,16 @@ import 'swiper/css/navigation';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
-import useAuth from '../Hooks/useAuth';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
+import usePremium from '../Hooks/usePremium';
 
 const TrendingArticles = () => {
-	const { user } = useAuth();
 	const axiosPublic = useAxiosPublic();
-	const axiosSecure = useAxiosSecure();
+	const [isPremium] = usePremium();
 	const { data: trendingArticles = [] } = useQuery({
 		queryKey: ['trendingArticles'],
 		queryFn: async () => {
 			const { data } = await axiosPublic.get('/trending-articles');
 			return data;
-		},
-	});
-
-	const { data: userInfo } = useQuery({
-		queryKey: ['userInfo', user?.email],
-		queryFn: async () => {
-			if (user?.email) {
-				const { data } = await axiosSecure.get(`/users/${user.email}`);
-				return data;
-			}
-			return null;
 		},
 	});
 
@@ -60,9 +47,7 @@ const TrendingArticles = () => {
 								<Link
 									to={`/article-details/${article._id}`}
 									className={`py-2 mt-6 text-white text-lg text-center inline-block px-4 ${
-										article.articleType === 'premium' &&
-										(!userInfo?.premiumTaken ||
-											Date.now() > userInfo.premiumTaken)
+										article.articleType === 'premium' && !isPremium
 											? 'bg-gray-400 pointer-events-none'
 											: 'bg-gray-700 hover:bg-gray-800'
 									}`}>

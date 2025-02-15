@@ -24,38 +24,48 @@ const AllPublishers = () => {
 					and stories
 				</p>
 			</div>
-
-			<Swiper
-				spaceBetween={30}
-				centeredSlides={true}
-				autoplay={{ delay: 2000 }}
-				speed={500}
-				loop={publishers.length >= 4}
-				modules={[Autoplay]}
-				breakpoints={{
-					425: {
-						slidesPerView: 2,
-					},
-					768: {
-						slidesPerView: 3,
-					},
-					1024: {
-						slidesPerView: 4,
-					},
-				}}
-				className="max-w-screen-xl mx-auto bg-gray-100 mySwiper">
-				{publishers.map(publisher => (
-					<SwiperSlide key={publisher._id} className="min-w-fit">
-						<div className="flex items-center justify-center gap-4 py-10">
-							<img
-								src={publisher.image}
-								className="object-cover w-10 h-10 rounded-full"
-							/>
-							<p className="text-2xl font-bold text-gray-500">{publisher.name}</p>
-						</div>
-					</SwiperSlide>
-				))}
-			</Swiper>
+			<div className="relative max-w-screen-xl mx-auto">
+				<Swiper
+					spaceBetween={30}
+					centeredSlides={true}
+					autoplay={{
+						delay: 1500,
+						disableOnInteraction: false,
+						pauseOnMouseEnter: true,
+					}}
+					speed={700}
+					loop={true}
+					modules={[Autoplay]}
+					breakpoints={{
+						425: {
+							slidesPerView: 2,
+							spaceBetween: 20,
+						},
+						768: {
+							slidesPerView: 3,
+							spaceBetween: 30,
+						},
+						1024: {
+							slidesPerView: 4,
+							spaceBetween: 40,
+						},
+					}}
+					className="pb-12 mySwiper">
+					{publishers.map(publisher => (
+						<SwiperSlide key={publisher._id} className="!w-auto">
+							<div>
+								<div className="flex flex-col items-center justify-center p-6">
+									<img
+										src={publisher.image}
+										alt={publisher.name}
+										className="object-contain h-12 w-fit"
+									/>
+								</div>
+							</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</div>
 		</div>
 	);
 };

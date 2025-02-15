@@ -32,30 +32,44 @@ const CheckoutForm = () => {
 		const card = elements.getElement(CardElement);
 		if (!card) return;
 
-		const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
-			payment_method: { card },
+		const { error } = await stripe.createPaymentMethod({
+			type: 'card',
+			card,
 		});
 
 		if (error) {
 			setError(error.message);
-		} else if (paymentIntent.status === 'succeeded') {
-			await handlePaymentSuccess();
+		} else {
+			setError('');
 		}
-	};
 
-	const handlePaymentSuccess = async () => {
-		const res = await axiosSecure.patch('/users/subscribe', {
-			email: user.email,
-			period: subscriptionPeriod,
-		});
+		const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+			clientSecret,
+			{
+				payment_method: {
+					card: card,
+				},
+			}
+		);
 
-		if (res.data.modifiedCount > 0) {
-			Swal.fire(
-				'Success!',
-				`You're now a premium user for ${subscriptionPeriod}.`,
-				'success'
-			);
-			navigate('/');
+		if (confirmError) {
+			console.log('confirm error');
+		} else {
+			if (paymentIntent.status === 'succeeded') {
+				const res = await axiosSecure.post('/users/subscribe', {
+					email: user.email,
+					period: subscriptionPeriod,
+				});
+				if (res.data.modifiedCount > 0) {
+					Swal.fire({
+						icon: 'success',
+						title: `You're now a premium user for ${subscriptionPeriod}.`,
+						showConfirmButton: false,
+						timer: 1500,
+					});
+					navigate('/');
+				}
+			}
 		}
 	};
 

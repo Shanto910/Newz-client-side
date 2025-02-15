@@ -10,8 +10,8 @@ const usePremium = () => {
 		queryKey: [user?.email, 'isPremium'],
 		enabled: !loading,
 		queryFn: async () => {
-			const res = await axiosSecure.get(`/users/${user.email}`);
-			return res.data?.premiumTaken && Date.now() < res.data.premiumTaken;
+			const res = await axiosSecure.get(`/users/premium/${user.email}`);
+			return res.data?.premium;
 		},
 	});
 

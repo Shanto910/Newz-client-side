@@ -83,19 +83,19 @@ const MyArticles = () => {
 								<td className="px-6 py-4">{article.title}</td>
 								<td className="px-6 py-4">
 									{article.status === 'approved' && (
-										<span className="px-2 py-1 text-green-700 bg-green-100 rounded-full">
+										<span className="px-2 py-1 text-green-700 bg-green-100">
 											Approved
 										</span>
 									)}
 									{article.status === 'declined' && (
 										<div className="flex items-center gap-2">
-											<span className="px-2 py-1 text-red-700 bg-red-100 rounded-full">
+											<span className="px-2 py-1 text-red-700 bg-red-100">
 												Declined
 											</span>
 										</div>
 									)}
 									{article.status === 'pending' && (
-										<span className="px-2 py-1 text-yellow-700 bg-yellow-100 rounded-full">
+										<span className="px-2 py-1 text-yellow-700 bg-yellow-100">
 											Pending
 										</span>
 									)}
@@ -113,7 +113,7 @@ const MyArticles = () => {
 									{article.articleType === 'premium' ? 'Yes' : 'No'}
 								</td>
 								<td className="px-6 py-4">
-									<div className="flex items-center gap-4">
+									<div className="flex items-center justify-center gap-4">
 										<Link
 											to={`/update-article/${article._id}`}
 											className="px-3 py-1 text-gray-800 transition duration-300 bg-white border border-gray-800 hover:bg-gray-800 hover:text-white">

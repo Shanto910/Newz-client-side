@@ -5,6 +5,7 @@ import useAxiosPublic from '../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
 import useAuth from '../Hooks/useAuth';
+import usePremium from '../Hooks/usePremium';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -45,6 +46,7 @@ const AddArticles = () => {
 	const axiosPublic = useAxiosPublic();
 	const axiosSecure = useAxiosSecure();
 	const { user } = useAuth();
+	const [isPremium] = usePremium();
 
 	const { data: publishers = [] } = useQuery({
 		queryKey: ['publishers'],
@@ -60,6 +62,20 @@ const AddArticles = () => {
 
 	const onSubmit = async e => {
 		e.preventDefault();
+
+		if (!isPremium) {
+			const { data: existingArticles } = await axiosSecure.get(
+				`/articles/user/${user?.email}`
+			);
+			if (existingArticles.length > 0) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Submission failed',
+					text: 'Normal users can only post one article. Upgrade to premium for unlimited posts.',
+				});
+				return;
+			}
+		}
 
 		const form = e.target;
 		const title = form.title.value;
@@ -87,25 +103,6 @@ const AddArticles = () => {
 			});
 
 			if (res.data.success) {
-				const { data: userInfo } = await axiosSecure.get(`/users/${user?.email}`);
-
-				const isPremiumUser =
-					userInfo?.premiumTaken &&
-					Date.now() < new Date(userInfo.premiumTaken).getTime();
-
-				if (!isPremiumUser) {
-					const { data: existingArticles } = await axiosSecure.get(
-						`/articles/user/${user?.email}`
-					);
-					if (existingArticles.length > 0) {
-						Swal.fire({
-							icon: 'error',
-							title: 'Submission failed',
-							text: 'Normal users can only post one article. Upgrade to premium for unlimited posts.',
-						});
-						return;
-					}
-				}
 				const articleInfo = {
 					title,
 					publisher,
