@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaAngleDown } from 'react-icons/fa6';
+import { motion } from 'framer-motion';
 
 const FAQ = () => {
 	const [openIndex, setOpenIndex] = useState(null);
@@ -37,7 +38,12 @@ const FAQ = () => {
 	];
 
 	return (
-		<div className="max-w-screen-lg px-4 mx-auto mb-12 md:mb-24 lg:px-8">
+		<motion.div
+			initial={{ opacity: 0, y: 30 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6 }}
+			viewport={{ once: true, amount: 0.2 }}
+			className="max-w-screen-lg px-4 mx-auto mb-12 md:mb-24 lg:px-8">
 			<div className="mb-8 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">FAQ</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
@@ -66,7 +72,7 @@ const FAQ = () => {
 					</div>
 				))}
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

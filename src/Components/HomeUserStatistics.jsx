@@ -3,6 +3,7 @@ import { HiUsers } from 'react-icons/hi';
 import { FaUserPlus } from 'react-icons/fa6';
 import PropTypes from 'prop-types';
 import CountUp from 'react-countup';
+import { motion } from 'framer-motion';
 
 const StatCard = ({ Icon, count, label }) => (
 	<div className="flex flex-col items-center max-w-sm p-6 transition-shadow bg-white shadow-md hover:shadow-lg min-w-48">
@@ -20,7 +21,12 @@ const StatCard = ({ Icon, count, label }) => (
 
 const HomeUserStatistics = () => {
 	return (
-		<div className="max-w-screen-xl px-4 mx-auto mb-12 md:mb-24 lg:px-8">
+		<motion.div
+			initial={{ opacity: 0, y: 30 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6 }}
+			viewport={{ once: true, amount: 0.2 }}
+			className="max-w-screen-xl px-4 mx-auto mb-12 md:mb-24 lg:px-8">
 			<div className="mb-8 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">Our Users</h2>
 				<p className="text-xl max-w-[62ch] mx-auto text-gray-500">
@@ -33,7 +39,7 @@ const HomeUserStatistics = () => {
 				<StatCard Icon={HiUsers} count={9} label="Free Users" />
 				<StatCard Icon={FaUserPlus} count={2} label="Premium Users" />
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

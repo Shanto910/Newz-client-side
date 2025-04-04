@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const SubscriptionPlans = () => {
 	return (
-		<div className="max-w-screen-xl px-4 mx-auto mb-14 md:mb-28 lg:px-8">
+		<motion.div
+			initial={{ opacity: 0, y: 30 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6 }}
+			viewport={{ once: true, amount: 0.1 }}
+			className="max-w-screen-xl px-4 mx-auto mb-14 md:mb-28 lg:px-8">
 			<div className="mb-16 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">
 					Subscription Plans
@@ -83,7 +89,7 @@ const SubscriptionPlans = () => {
 					</button>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import usePremium from '../Hooks/usePremium';
+import { motion } from 'framer-motion';
 
 const TrendingArticles = () => {
 	const axiosPublic = useAxiosPublic();
@@ -31,7 +32,11 @@ const TrendingArticles = () => {
 				className="relative max-w-screen-xl mx-auto">
 				{trendingArticles.map((article, i) => (
 					<SwiperSlide key={i}>
-						<div className="relative h-80 md:h-96">
+						<motion.div
+							className="relative h-80 md:h-96"
+							initial={{ opacity: 0, scale: 0.95 }}
+							animate={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.5 }}>
 							<img
 								src={article.image}
 								alt={article.title}
@@ -54,7 +59,7 @@ const TrendingArticles = () => {
 									More about this article
 								</Link>
 							</div>
-						</div>
+						</motion.div>
 					</SwiperSlide>
 				))}
 				<div className="text-lg font-semibold md:text-xl">

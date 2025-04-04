@@ -3,6 +3,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { motion } from 'framer-motion';
 
 const AllPublishers = () => {
 	const axiosSecure = useAxiosSecure();
@@ -13,6 +14,7 @@ const AllPublishers = () => {
 			return res.data;
 		},
 	});
+
 	return (
 		<div className="mb-12 md:mb-24">
 			<div className="px-4 mb-8 text-center lg:px-8">
@@ -53,15 +55,17 @@ const AllPublishers = () => {
 					className="pb-12 mySwiper">
 					{publishers.map(publisher => (
 						<SwiperSlide key={publisher._id} className="!w-auto">
-							<div>
-								<div className="flex flex-col items-center justify-center p-6">
-									<img
-										src={publisher.image}
-										alt={publisher.name}
-										className="object-contain h-12 w-fit"
-									/>
-								</div>
-							</div>
+							<motion.div
+								initial={{ opacity: 0, scale: 0.95 }}
+								animate={{ opacity: 1, scale: 1 }}
+								transition={{ duration: 0.6 }}
+								className="flex flex-col items-center justify-center p-6">
+								<img
+									src={publisher.image}
+									alt={publisher.name}
+									className="object-contain h-12 w-fit"
+								/>
+							</motion.div>
 						</SwiperSlide>
 					))}
 				</Swiper>

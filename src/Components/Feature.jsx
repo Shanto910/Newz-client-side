@@ -1,4 +1,5 @@
 import { FaNewspaper, FaClock, FaShieldAlt, FaUsers } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const features = [
 	{
@@ -29,7 +30,12 @@ const features = [
 
 const Feature = () => {
 	return (
-		<div className="max-w-screen-lg px-4 mx-auto mb-12 text-center md:mb-24 lg:px-8">
+		<motion.div
+			initial={{ opacity: 0, y: 30 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6 }}
+			viewport={{ once: true, amount: 0.2 }}
+			className="max-w-screen-lg px-4 mx-auto mb-12 text-center md:mb-24 lg:px-8">
 			<div className="mb-8 text-center">
 				<h2 className="mb-4 text-2xl font-bold text-gray-700 md:text-4xl">
 					Why Choose Us?
@@ -49,7 +55,7 @@ const Feature = () => {
 					</div>
 				))}
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 
