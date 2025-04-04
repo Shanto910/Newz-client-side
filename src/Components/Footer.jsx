@@ -36,18 +36,12 @@ const Footer = () => {
 						<p className="text-gray-400 leading-relaxed max-w-[28ch]">
 							Subscribe to get the latest news before anyone else.
 						</p>
-						<form className="mt-5">
-							<input
-								className="max-w-sm px-4 py-4 text-gray-800"
-								type="email"
-								placeholder="Enter your email"
-							/>
-							<Link
-								to={'/'}
-								className="inline-block px-4 py-4 font-semibold text-gray-100 transition duration-300 bg-gray-500 hover:bg-gray-600 text-inherit">
-								Subscribe
-							</Link>
-						</form>
+
+						<Link
+							to={'/subscription'}
+							className="inline-block w-full px-4 py-4 mt-5 font-semibold text-center text-gray-100 transition duration-300 bg-gray-500 hover:bg-gray-600 text-inherit">
+							Subscribe
+						</Link>
 					</li>
 				</ul>
 				<p className="w-full py-8 text-center border-t border-t-gray-600">
