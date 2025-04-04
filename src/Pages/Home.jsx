@@ -8,6 +8,7 @@ import TrendingArticles from '../Components/TrendingArticles';
 import AllPublishers from '../Components/AllPublishers';
 import HomeUserStatistics from '../Components/HomeUserStatistics';
 import SubscriptionPlans from '../Components/SubscriptionPlans';
+import Testimonials from '../Components/Testimonials';
 
 const Home = () => {
 	const [showModal, setShowModal] = useState(false);
@@ -55,6 +56,7 @@ const Home = () => {
 			<AllPublishers />
 			<HomeUserStatistics />
 			<Feature />
+			<Testimonials />
 			<SubscriptionPlans />
 			<FAQ />
 		</>
